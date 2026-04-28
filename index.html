@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>골프에진심 골프서클</title>
+<style>
+:root{
+  --g1:#1a4a22;--g2:#2d6635;--g3:#4a8c57;--g4:#d4e9d8;
+  --cream:#f7f2e8;--cream2:#ede7d5;--white:#fff;
+  --text:#1a2e1c;--text2:#3d5c42;--border:#c8d9c9;
+  --shadow:rgba(0,0,0,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:var(--cream);color:var(--text);font-size:14px}
+
+/* ── 헤더 ── */
+header{background:var(--g1);color:#fff;padding:26px 20px 20px;text-align:center}
+.hd-inner{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap}
+.emblem{width:82px;height:82px;border-radius:50%;border:3px solid rgba(255,255,255,.3);object-fit:cover;background:var(--cream)}
+.hd-text h1{font-size:1.9rem;font-weight:800;letter-spacing:-.5px}
+.hd-text p{font-size:.85rem;opacity:.65;margin-top:3px;letter-spacing:2px}
+
+/* ── 메인탭 ── */
+.tab-bar{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;
+  background:var(--g2);padding:10px 14px;position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 8px var(--shadow)}
+.tab-btn{background:transparent;border:2px solid rgba(255,255,255,.4);color:rgba(255,255,255,.85);
+  font-size:.88rem;font-weight:700;padding:7px 20px;border-radius:30px;cursor:pointer;transition:.2s}
+.tab-btn:hover{background:rgba(255,255,255,.18);color:#fff}
+.tab-btn.active{background:#fff;border-color:#fff;color:var(--g1)}
+
+/* ── 패널 ── */
+.panel{display:none;max-width:1040px;margin:26px auto;padding:0 14px 60px}
+.panel.active{display:block}
+.panel-title{font-size:1.2rem;font-weight:700;color:var(--g1);
+  border-left:4px solid var(--g2);padding-left:12px;margin-bottom:18px}
+
+/* ── 서브탭 ── */
+.sub-bar{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.sub-btn{background:var(--cream2);border:1.5px solid #bfb89a;color:var(--text2);
+  font-size:.8rem;font-weight:600;padding:5px 15px;border-radius:20px;cursor:pointer;transition:.18s}
+.sub-btn:hover{background:#d6cfb5}
+.sub-btn.active{background:var(--g1);border-color:var(--g1);color:#fff}
+.sub-panel{display:none}.sub-panel.active{display:block}
+
+/* ── 카드 ── */
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 10px var(--shadow);
+  overflow:hidden;margin-bottom:20px}
+.card-head{background:var(--g1);color:#fff;padding:10px 16px;font-weight:700;font-size:.95rem}
+.card-body{padding:16px}
+
+/* ── 테이블 ── */
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.83rem}
+thead th{background:var(--g1);color:#fff;padding:9px 12px;text-align:center;
+  white-space:nowrap;border-right:1px solid rgba(255,255,255,.15)}
+tbody tr:nth-child(even){background:#f4f8f4}
+tbody tr:hover{background:#e8f2ea}
+tbody td{padding:7px 12px;border-bottom:1px solid #e2e8e2;border-right:1px solid #eaedea;white-space:nowrap}
+td.r{text-align:right}
+td.c{text-align:center}
+
+/* ── 조편성표 드롭다운 ── */
+.jo-select-wrap{margin-bottom:20px}
+.jo-select{appearance:none;-webkit-appearance:none;width:100%;max-width:360px;
+  background:var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231a4a22' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 14px center;
+  border:2px solid var(--g3);border-radius:10px;
+  padding:10px 40px 10px 16px;font-size:.95rem;font-weight:700;color:var(--g1);
+  cursor:pointer;box-shadow:0 1px 5px var(--shadow)}
+.jo-select:focus{outline:none;border-color:var(--g1)}
+
+/* ── 조편성표 카드 ── */
+.round-card{background:#fff;border-radius:12px;box-shadow:0 2px 10px var(--shadow);
+  margin-bottom:22px;overflow:hidden;display:none}
+.round-card.active{display:block}
+.round-head{background:var(--g1);color:#fff;padding:12px 18px;display:flex;flex-wrap:wrap;gap:6px;align-items:baseline}
+.round-head .r-title{font-size:1rem;font-weight:800}
+.round-body{padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.group-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.group-label{background:var(--g3);color:#fff;border-radius:20px;padding:4px 13px;
+  font-size:.78rem;font-weight:700;white-space:nowrap}
+/* 코스별 색상 */
+.course-stone{background:#2d6635}
+.course-gate{background:#b06a10}
+.course-rocky{background:#1a6b9e}
+.course-hill{background:#6b3fa0}
+.course-out{background:#1a7a6a}
+.course-in{background:#a04030}
+.group-time{color:var(--text2);font-size:.8rem;min-width:64px}
+.player-list{display:flex;flex-wrap:wrap;gap:6px}
+.player{background:var(--g4);color:var(--g1);border-radius:8px;padding:4px 12px;
+  font-size:.85rem;font-weight:600}
+
+/* ── 수지계산서 좌우 ── */
+.income-expense{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.income-expense{grid-template-columns:1fr}}
+.ie-block .ie-head{padding:8px 12px;font-weight:700;font-size:.88rem;border-radius:6px 6px 0 0}
+.ie-income .ie-head{background:#2d6635;color:#fff}
+.ie-expense .ie-head{background:#a53c2a;color:#fff}
+.ie-block table{width:100%;border-collapse:collapse;font-size:.8rem}
+.ie-block thead th{padding:7px 10px;text-align:center;white-space:nowrap}
+.ie-income thead th{background:#3d7c47;color:#fff}
+.ie-expense thead th{background:#c0432e;color:#fff}
+.ie-block tbody td{padding:6px 10px;border-bottom:1px solid #eee;white-space:nowrap}
+.ie-block tbody tr:hover{background:#f9f9f9}
+.total-row{background:var(--cream2)!important;font-weight:700}
+.balance-row{background:var(--g4)!important;font-weight:800;color:var(--g1)}
+
+/* ── 연간일정표 ── */
+.sched-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:12px}
+.sched-item{background:#fff;border-radius:10px;padding:14px 16px;
+  box-shadow:0 1px 6px var(--shadow);border-left:4px solid var(--g3)}
+.sched-item.contest{border-left-color:#c0822a;background:#fffbf2}
+.sched-item.trip{border-left-color:#2a7fb0;background:#f2f8fc}
+.sched-no{font-size:.72rem;color:#888;margin-bottom:2px}
+.sched-date{font-size:1rem;font-weight:800;color:var(--g1)}
+.sched-day{display:inline-block;background:var(--g4);color:var(--g1);
+  border-radius:4px;padding:2px 7px;font-size:.72rem;font-weight:700;margin-left:5px}
+.sched-venue{font-size:.85rem;margin-top:5px;font-weight:600}
+.sched-note{font-size:.75rem;color:#b07020;margin-top:3px;font-weight:600}
+
+/* ── 핸디표 하이라이트 ── */
+.handy-hi{background:#e8f5e9!important;font-weight:700}
+
+/* ── 회원명부 ── */
+.member-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.member-card{background:#fff;border-radius:10px;padding:12px 15px;
+  box-shadow:0 1px 6px var(--shadow);display:flex;justify-content:space-between;align-items:center}
+.member-name{font-weight:700;font-size:.92rem}
+.member-fee{font-size:.8rem;color:var(--text2)}
+.member-paid{color:#2d6635;font-weight:700;font-size:.85rem}
+.member-note{font-size:.72rem;color:#888;margin-top:2px}
+
+/* ── 시상 ── */
+.award-month{margin-bottom:20px}
+.award-month-title{font-size:.95rem;font-weight:700;color:var(--g1);
+  border-bottom:2px solid var(--g3);padding-bottom:5px;margin-bottom:10px}
+.award-grid{display:flex;flex-wrap:wrap;gap:8px}
+.award-item{background:#fff;border-radius:10px;padding:9px 14px;
+  box-shadow:0 1px 5px var(--shadow);min-width:120px}
+.award-label{font-size:.72rem;color:#888;margin-bottom:2px}
+.award-winner{font-weight:800;font-size:.95rem;color:var(--g1)}
+.award-prize{font-size:.78rem;color:#b07020;font-weight:600}
+
+/* ── 예산안 ── */
+.budget-summary{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+@media(max-width:600px){.budget-summary{grid-template-columns:1fr}}
+.budget-box{background:#fff;border-radius:10px;padding:14px 16px;box-shadow:0 1px 6px var(--shadow)}
+.budget-box h3{font-size:.88rem;color:#888;margin-bottom:8px}
+.budget-amount{font-size:1.5rem;font-weight:800;color:var(--g1)}
+
+/* ── 운영안내 ── */
+.guide-wrap{background:#fff;border-radius:12px;box-shadow:0 2px 10px var(--shadow);
+  padding:22px;text-align:center}
+.guide-wrap img{max-width:100%;height:auto;border-radius:6px}
+
+footer{background:var(--g1);color:rgba(255,255,255,.55);text-align:center;
+  font-size:.75rem;padding:14px}
+@media(max-width:580px){
+  .hd-text h1{font-size:1.4rem}
+  .tab-btn{font-size:.8rem;padding:6px 13px}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ 헤더 ══ -->
+<header>
+  <div class="hd-inner">
+    <img class="emblem" src="emblem.png" alt="GWH 엠블럼"/>
+    <div class="hd-text">
+      <h1>골프에진심</h1>
+      <p>GOLF WITH HEART · GWH</p>
+    </div>
+  </div>
+</header>
+
+<!-- ══ 메인 탭 바 ══ -->
+<nav class="tab-bar">
+  <button class="tab-btn active" onclick="mainTab('jo',this)">조편성표</button>
+  <button class="tab-btn" onclick="mainTab('handy',this)">핸디</button>
+  <button class="tab-btn" onclick="mainTab('ops',this)">운영현황표</button>
+  <button class="tab-btn" onclick="mainTab('guide',this)">운영안내</button>
+</nav>
+
+<!-- ══════════════════════════════════════
+     수지계산서 패널
+══════════════════════════════════════ -->
+<section id="tab-suji" class="panel" hidden>
+  <h2 class="panel-title">수지계산서</h2>
+
+  <!-- 서브탭 -->
+  <div class="sub-bar">
+    <button class="sub-btn active" onclick="subTab('suji','sched',this)">📅 연간 일정표</button>
+    <button class="sub-btn" onclick="subTab('suji','member',this)">👥 회원명부</button>
+    <button class="sub-btn" onclick="subTab('suji','handy',this)">📊 핸디</button>
+    <button class="sub-btn" onclick="subTab('suji','award',this)">🏆 시상</button>
+    <button class="sub-btn" onclick="subTab('suji','budget',this)">💰 예산안</button>
+  </div>
+
+  <!-- 연간 일정표 -->
+  <div id="suji-sched" class="sub-panel active">
+    <div class="card">
+      <div class="card-head">⛳ 2026년 골프에진심 연간 일정표</div>
+      <div class="card-body">
+        <p style="font-size:.8rem;color:#888;margin-bottom:14px">※ 골프장 사정에 따라 골프장 변동이 있을 수 있습니다.</p>
+        <div class="sched-grid">
+          <div class="sched-item"><div class="sched-no">No.1</div><div class="sched-date">1월 11일<span class="sched-day">일</span></div><div class="sched-venue">서라벌</div></div>
+          <div class="sched-item"><div class="sched-no">No.2</div><div class="sched-date">2월 22일<span class="sched-day">일</span></div><div class="sched-venue">스톤게이트</div></div>
+          <div class="sched-item"><div class="sched-no">No.3</div><div class="sched-date">3월 14일<span class="sched-day">토</span></div><div class="sched-venue">스톤게이트</div></div>
+          <div class="sched-item"><div class="sched-no">No.4</div><div class="sched-date">4월 11일<span class="sched-day">토</span></div><div class="sched-venue">통도</div></div>
+          <div class="sched-item contest"><div class="sched-no">No.5</div><div class="sched-date">5월 9일<span class="sched-day">토</span></div><div class="sched-venue">해운대비치CC</div><div class="sched-note">🏆 대회</div></div>
+          <div class="sched-item"><div class="sched-no">No.6</div><div class="sched-date">6월 13일<span class="sched-day">토</span></div><div class="sched-venue">해운대</div></div>
+          <div class="sched-item"><div class="sched-no">No.7</div><div class="sched-date">7월 11일<span class="sched-day">토</span></div><div class="sched-venue">울산</div></div>
+          <div class="sched-item"><div class="sched-no">No.8</div><div class="sched-date">8월 8일<span class="sched-day">토</span></div><div class="sched-venue">미정</div></div>
+          <div class="sched-item trip"><div class="sched-no">No.9</div><div class="sched-date">9월 12일<span class="sched-day">토</span></div><div class="sched-venue">블루원(3부) / 경주(1부)</div><div class="sched-note">🏆 대회 · 1박2일 원정</div></div>
+          <div class="sched-item contest"><div class="sched-no">No.10</div><div class="sched-date">10월 10일<span class="sched-day">토</span></div><div class="sched-venue">해운대</div></div>
+          <div class="sched-item"><div class="sched-no">No.11</div><div class="sched-date">11월 14일<span class="sched-day">토</span></div><div class="sched-venue">미정</div></div>
+          <div class="sched-item contest"><div class="sched-no">No.12</div><div class="sched-date">12월 13일<span class="sched-day">일</span></div><div class="sched-venue">스톤게이트</div><div class="sched-note">🏆 대회</div></div>
+        </div>
+        <p style="margin-top:16px;font-size:.8rem;color:#666">총 <strong>12회</strong> | 대회 <strong>3회</strong> | 원정 <strong>1회(9월 1박2일)</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 회원명부 -->
+  <div id="suji-member" class="sub-panel">
+    <div class="card">
+      <div class="card-head">👥 회원명부</div>
+      <div class="card-body">
+        <div class="member-grid">
+          <div class="member-card"><div><div class="member-name">강진구</div><div class="member-note">5월 신규가입</div></div><div><div class="member-fee">130,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">강현명</div></div><div><div class="member-fee">200,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">김기웅</div></div><div><div class="member-fee">200,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">김기현</div><div class="member-note">3월부터 참석(허리부상)</div></div><div><div class="member-fee">150,000원</div><div style="font-size:.8rem;color:#c44">미납</div></div></div>
+          <div class="member-card"><div><div class="member-name">김동환</div><div class="member-note">3월 신규가입</div></div><div><div class="member-fee">150,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">박정태</div></div><div><div class="member-fee">200,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">박찬복</div><div class="member-note">일요일 종교행사 참석</div></div><div><div class="member-fee">150,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">유창우</div></div><div><div class="member-fee">200,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">윤혁진</div></div><div><div class="member-fee">200,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">이민호</div></div><div><div class="member-fee">200,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">이수형</div></div><div><div class="member-fee">200,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">이재원</div></div><div><div class="member-fee">200,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">장재연</div></div><div><div class="member-fee">200,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">정지환</div></div><div><div class="member-fee">200,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">정효영</div></div><div><div class="member-fee">200,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">천규민</div><div class="member-note">3월 신규가입</div></div><div><div class="member-fee">150,000원</div><div style="font-size:.8rem;color:#c44">미납</div></div></div>
+          <div class="member-card"><div><div class="member-name">탁승우</div></div><div><div class="member-fee">200,000원</div><div class="member-paid">납부 ✓</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 핸디 -->
+  <div id="suji-handy" class="sub-panel">
+    <div class="card">
+      <div class="card-head">📊 핸디</div>
+      <div class="card-body">
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr>
+              <th>이름</th><th>실제핸디</th><th>기준핸디</th>
+              <th>25.12 더골프</th><th>26.1 서라벌</th><th>26.2 스톤</th><th>26.3 스톤</th><th>26.4 통도</th><th>평균핸디</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>유창우</td><td class="c">87</td><td class="c">0</td><td class="c">0</td><td class="c">0</td><td class="c">88</td><td class="c">0</td><td class="c">82</td><td class="c handy-hi">85</td></tr>
+              <tr><td>오대한</td><td class="c">81</td><td class="c">0</td><td class="c">0</td><td class="c">0</td><td class="c">0</td><td class="c">94</td><td class="c">0</td><td class="c handy-hi">87</td></tr>
+              <tr><td>이재원</td><td class="c">86</td><td class="c">90</td><td class="c">86</td><td class="c">89</td><td class="c">94</td><td class="c">84</td><td class="c handy-hi">88</td><td></td></tr>
+              <tr><td>김기웅</td><td class="c">86</td><td class="c">94</td><td class="c">87</td><td class="c">88</td><td class="c">94</td><td class="c">80</td><td class="c handy-hi">88</td><td></td></tr>
+              <tr><td>윤혁진</td><td class="c">91</td><td class="c">91</td><td class="c">0</td><td class="c">0</td><td class="c">86</td><td class="c">86</td><td class="c handy-hi">88</td><td></td></tr>
+              <tr><td>박찬복</td><td class="c">86</td><td class="c">0</td><td class="c">0</td><td class="c">0</td><td class="c">94</td><td class="c">85</td><td class="c handy-hi">88</td><td></td></tr>
+              <tr><td>탁승우</td><td class="c">86</td><td class="c">88</td><td class="c">96</td><td class="c">93</td><td class="c">103</td><td class="c">87</td><td class="c handy-hi">92</td><td></td></tr>
+              <tr><td>정효영</td><td class="c">93</td><td class="c">94</td><td class="c">93</td><td class="c">0</td><td class="c">97</td><td class="c">0</td><td class="c handy-hi">94</td><td></td></tr>
+              <tr><td>천규민</td><td class="c">90</td><td class="c">0</td><td class="c">0</td><td class="c">96</td><td class="c">96</td><td class="c">0</td><td class="c handy-hi">94</td><td></td></tr>
+              <tr><td>김동환</td><td class="c">90</td><td class="c">0</td><td class="c">0</td><td class="c">0</td><td class="c">100</td><td class="c">0</td><td class="c handy-hi">95</td><td></td></tr>
+              <tr><td>이수형</td><td class="c">97</td><td class="c">97</td><td class="c">0</td><td class="c">91</td><td class="c">99</td><td class="c">96</td><td class="c handy-hi">96</td><td></td></tr>
+              <tr><td>박정태</td><td class="c">95</td><td class="c">0</td><td class="c">0</td><td class="c">98</td><td class="c">100</td><td class="c">99</td><td class="c handy-hi">98</td><td></td></tr>
+              <tr><td>이민호</td><td class="c">89</td><td class="c">95</td><td class="c">0</td><td class="c">110</td><td class="c">0</td><td class="c">0</td><td class="c handy-hi">98</td><td></td></tr>
+              <tr><td>강진구</td><td class="c">98</td><td class="c">0</td><td class="c">0</td><td class="c">0</td><td class="c">0</td><td class="c">98</td><td class="c handy-hi">98</td><td></td></tr>
+              <tr><td>김기현</td><td class="c">103</td><td class="c">103</td><td class="c">0</td><td class="c">0</td><td class="c">102</td><td class="c">100</td><td class="c handy-hi">102</td><td></td></tr>
+              <tr><td>강현명</td><td class="c">106</td><td class="c">104</td><td class="c">97</td><td class="c">110</td><td class="c">104</td><td class="c">106</td><td class="c handy-hi">104</td><td></td></tr>
+              <tr><td>장재연</td><td class="c">100</td><td class="c">113</td><td class="c">99</td><td class="c">110</td><td class="c">107</td><td class="c">101</td><td class="c handy-hi">105</td><td></td></tr>
+              <tr><td>정지환</td><td class="c">97</td><td class="c">100</td><td class="c">0</td><td class="c">121</td><td class="c">110</td><td class="c">100</td><td class="c handy-hi">105</td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:14px;font-size:.78rem;color:#888">※ 0은 해당 라운드 미참가를 의미합니다.</p>
+        <p style="margin-top:10px;font-weight:700;color:var(--g1);font-size:.88rem">여성부 (26.4 통도)</p>
+        <div class="tbl-wrap" style="margin-top:8px">
+          <table>
+            <thead><tr><th>이름</th><th>26.4 통도</th><th>평균핸디</th></tr></thead>
+            <tbody>
+              <tr><td>김은미</td><td class="c">94</td><td class="c handy-hi">94</td></tr>
+              <tr><td>최수정</td><td class="c">111</td><td class="c handy-hi">111</td></tr>
+              <tr><td>송은이</td><td class="c">99</td><td class="c handy-hi">99</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 시상 -->
+  <div id="suji-award" class="sub-panel">
+    <div class="card">
+      <div class="card-head">🏆 시상 내역</div>
+      <div class="card-body">
+
+        <div class="award-month">
+          <div class="award-month-title">26년 1월</div>
+          <div class="award-grid">
+            <div class="award-item"><div class="award-label">우승</div><div class="award-winner">강현명</div><div class="award-prize">2만원</div></div>
+            <div class="award-item"><div class="award-label">골드메달</div><div class="award-winner">이재원</div><div class="award-prize">2만원</div></div>
+            <div class="award-item"><div class="award-label">아차상</div><div class="award-winner">장재연</div><div class="award-prize">1만원</div></div>
+            <div class="award-item"><div class="award-label">팀우승</div><div class="award-winner">김기웅</div><div class="award-prize">1만원</div></div>
+          </div>
+        </div>
+
+        <div class="award-month">
+          <div class="award-month-title">26년 2월</div>
+          <div class="award-grid">
+            <div class="award-item"><div class="award-label">우승</div><div class="award-winner">이수형</div><div class="award-prize">2만원</div></div>
+            <div class="award-item"><div class="award-label">골드메달</div><div class="award-winner">김기웅</div><div class="award-prize">2만원</div></div>
+            <div class="award-item"><div class="award-label">아차상</div><div class="award-winner">정지환</div><div class="award-prize">1만원</div></div>
+            <div class="award-item"><div class="award-label">팀우승</div><div class="award-winner">이수형, 유창우</div><div class="award-prize">각 1만원</div></div>
+            <div class="award-item"><div class="award-label">롱기</div><div class="award-winner">이재원</div><div class="award-prize">1만원</div></div>
+            <div class="award-item"><div class="award-label">니어</div><div class="award-winner">탁승우</div><div class="award-prize">1만원</div></div>
+          </div>
+        </div>
+
+        <div class="award-month">
+          <div class="award-month-title">26년 3월</div>
+          <div class="award-grid">
+            <div class="award-item"><div class="award-label">우승</div><div class="award-winner">김기현</div><div class="award-prize">2만원</div></div>
+            <div class="award-item"><div class="award-label">골드메달</div><div class="award-winner">윤혁진</div><div class="award-prize">2만원</div></div>
+            <div class="award-item"><div class="award-label">아차상</div><div class="award-winner">장재연</div><div class="award-prize">1만원</div></div>
+            <div class="award-item"><div class="award-label">롱기</div><div class="award-winner">천규민</div><div class="award-prize">1만원</div></div>
+            <div class="award-item"><div class="award-label">니어</div><div class="award-winner">박찬복</div><div class="award-prize">1만원</div></div>
+          </div>
+        </div>
+
+        <div class="award-month">
+          <div class="award-month-title">26년 4월</div>
+          <div class="award-grid">
+            <div class="award-item"><div class="award-label">우승</div><div class="award-winner">정지환</div><div class="award-prize">2만원</div></div>
+            <div class="award-item"><div class="award-label">골드메달</div><div class="award-winner">김기웅</div><div class="award-prize">2만원</div></div>
+            <div class="award-item"><div class="award-label">아차상</div><div class="award-winner">장재연</div><div class="award-prize">1만원</div></div>
+            <div class="award-item"><div class="award-label">롱기</div><div class="award-winner">박찬복</div><div class="award-prize">1만원</div></div>
+          </div>
+        </div>
+
+        <div class="award-month" style="margin-top:20px">
+          <div class="award-month-title" style="color:#2a7fb0;border-color:#2a7fb0">26년 4월 여성부</div>
+          <div class="award-grid">
+            <div class="award-item" style="border-left:3px solid #2a7fb0"><div class="award-label">1위</div><div class="award-winner">김은미</div><div class="award-prize">골프공 1더즌 + 피부시술권</div></div>
+            <div class="award-item" style="border-left:3px solid #2a7fb0"><div class="award-label">2위</div><div class="award-winner">송은이</div><div class="award-prize">현금 3만원</div></div>
+            <div class="award-item" style="border-left:3px solid #2a7fb0"><div class="award-label">3위</div><div class="award-winner">최수정</div><div class="award-prize">골프공 6구</div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 예산안 -->
+  <div id="suji-budget" class="sub-panel">
+    <div class="card">
+      <div class="card-head">💰 26년 예산안</div>
+      <div class="card-body">
+        <div class="budget-summary">
+          <div class="budget-box">
+            <h3>수입 합계</h3>
+            <div class="budget-amount" style="color:#2d6635">3,400,000원</div>
+            <p style="font-size:.78rem;color:#888;margin-top:6px">회비수입 3,000,000 + 찬조수입 400,000</p>
+          </div>
+          <div class="budget-box">
+            <h3>지출 합계</h3>
+            <div class="budget-amount" style="color:#a53c2a">3,400,000원</div>
+          </div>
+        </div>
+        <p style="font-size:.85rem;font-weight:700;color:var(--g1);margin-bottom:10px">수입 내역</p>
+        <div class="tbl-wrap" style="margin-bottom:20px">
+          <table>
+            <thead><tr><th>항목</th><th>단가</th><th>인원/횟수</th><th>합계</th></tr></thead>
+            <tbody>
+              <tr><td>회비수입</td><td class="r">200,000원</td><td class="c">16명</td><td class="r">3,000,000원</td></tr>
+              <tr><td>찬조수입</td><td class="r">400,000원</td><td class="c">-</td><td class="r">400,000원</td></tr>
+              <tr class="total-row"><td colspan="3" class="c">합계</td><td class="r">3,400,000원</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:.85rem;font-weight:700;color:var(--g1);margin-bottom:10px">지출 내역 및 집행 현황</p>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>항목</th><th>단가</th><th>횟수</th><th>예산</th><th>1월</th><th>2월</th><th>3월</th><th>4월</th><th>소계</th></tr></thead>
+            <tbody>
+              <tr><td>식대(3월~9월)</td><td class="r">150,000</td><td class="c">9</td><td class="r">1,350,000</td><td class="c">-</td><td class="c">-</td><td class="r">172,000</td><td class="r">133,400</td><td class="r">305,400</td></tr>
+              <tr><td>식대(1·2·12월)</td><td class="r">200,000</td><td class="c">3</td><td class="r">600,000</td><td class="r">94,000</td><td class="r">253,000</td><td class="c">-</td><td class="c">-</td><td class="r">347,000</td></tr>
+              <tr><td>골드메달</td><td class="r">20,000</td><td class="c">9</td><td class="r">180,000</td><td class="r">20,000</td><td class="r">20,000</td><td class="r">20,000</td><td class="r">20,000</td><td class="r">80,000</td></tr>
+              <tr><td>우승</td><td class="r">20,000</td><td class="c">9</td><td class="r">180,000</td><td class="r">20,000</td><td class="r">20,000</td><td class="r">20,000</td><td class="r">20,000</td><td class="r">80,000</td></tr>
+              <tr><td>롱기</td><td class="r">10,000</td><td class="c">9</td><td class="r">90,000</td><td class="c">-</td><td class="r">10,000</td><td class="r">10,000</td><td class="r">10,000</td><td class="r">30,000</td></tr>
+              <tr><td>니어</td><td class="r">10,000</td><td class="c">9</td><td class="r">90,000</td><td class="c">-</td><td class="r">10,000</td><td class="r">10,000</td><td class="c">-</td><td class="r">20,000</td></tr>
+              <tr><td>아차상</td><td class="r">10,000</td><td class="c">9</td><td class="r">90,000</td><td class="r">10,000</td><td class="r">10,000</td><td class="r">10,000</td><td class="r">10,000</td><td class="r">40,000</td></tr>
+              <tr><td>대회 골드메달(5·10·12월)</td><td class="r">40,000</td><td class="c">3</td><td class="r">120,000</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="r">0</td></tr>
+              <tr><td>대회 우승(5·10·12월)</td><td class="r">40,000</td><td class="c">3</td><td class="r">120,000</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="r">0</td></tr>
+              <tr><td>대회 롱기(5·10·12월)</td><td class="r">20,000</td><td class="c">3</td><td class="r">60,000</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="r">0</td></tr>
+              <tr><td>대회 니어(5·10·12월)</td><td class="r">20,000</td><td class="c">3</td><td class="r">60,000</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="r">0</td></tr>
+              <tr><td>대회 아차상(5·10·12월)</td><td class="r">20,000</td><td class="c">3</td><td class="r">60,000</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="r">0</td></tr>
+              <tr><td>대회 그린피지원(5·10·12월)</td><td class="r">-</td><td class="c">2</td><td class="r">400,000</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="r">0</td></tr>
+              <tr class="total-row"><td colspan="3" class="c">합계</td><td class="r">3,400,000</td><td class="r">144,000</td><td class="r">323,000</td><td class="r">242,000</td><td class="r">193,400</td><td class="r">902,400</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:12px;font-size:.75rem;color:#888">※ 당초 대회 그린피 지원은 연 3회였으나, 3부 종료 후 식사 방침 변경으로 5월(1인 2만원)·10월(1인 1만원) 각 2회 지원으로 조정됨.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     조편성표 패널
+══════════════════════════════════════ -->
+<section id="tab-jo" class="panel active">
+  <h2 class="panel-title">조편성표</h2>
+
+  <div class="jo-select-wrap">
+    <select class="jo-select" onchange="showRound(this.value)">
+      <option value="jo5">26년 4월 11일 — 통도CC</option>
+      <option value="jo4">26년 3월 14일 — 스톤게이트CC</option>
+      <option value="jo3">26년 2월 22일 — 스톤게이트CC</option>
+      <option value="jo2">26년 1월 11일 — 서라벌골프클럽</option>
+      <option value="jo1">25년 12월 14일 — 골프존카운티 더골프</option>
+    </select>
+  </div>
+
+  <!-- 25.12 더골프 -->
+  <div id="jo1" class="round-card">
+    <div class="round-head">
+      <span class="r-title">12월 14일 (일) — 골프존카운티 더골프</span>
+    </div>
+    <div class="round-body">
+      <div class="group-row"><span class="group-label course-rocky">1조 (로키)</span><span class="group-time">13:04</span><div class="player-list"><span class="player">김기웅</span><span class="player">탁승우</span><span class="player">김기현</span><span class="player">윤혁진</span></div></div>
+      <div class="group-row"><span class="group-label course-rocky">2조 (로키)</span><span class="group-time">13:11</span><div class="player-list"><span class="player">이민호</span><span class="player">이수형</span><span class="player">강현명</span><span class="player">정효영</span></div></div>
+      <div class="group-row"><span class="group-label course-rocky">3조 (로키)</span><span class="group-time">13:18</span><div class="player-list"><span class="player">이재원</span><span class="player">조현</span><span class="player">정지환</span><span class="player">장재연</span></div></div>
+    </div>
+  </div>
+
+  <!-- 26.1 서라벌 -->
+  <div id="jo2" class="round-card">
+    <div class="round-head">
+      <span class="r-title">1월 11일 (일) — 서라벌골프클럽</span>
+    </div>
+    <div class="round-body">
+      <div class="group-row"><span class="group-label course-hill">1조 (힐-레이크)</span><span class="group-time">11:24</span><div class="player-list"><span class="player">김기웅</span><span class="player">이준호</span><span class="player">이재원</span><span class="player">장재연</span></div></div>
+      <div class="group-row"><span class="group-label course-hill">2조 (힐-레이크)</span><span class="group-time">11:31</span><div class="player-list"><span class="player">탁승우</span><span class="player">강현명</span><span class="player">윤혁진</span><span class="player">정효영</span></div></div>
+    </div>
+  </div>
+
+  <!-- 26.2 스톤게이트 -->
+  <div id="jo3" class="round-card">
+    <div class="round-head">
+      <span class="r-title">2월 22일 (일) — 스톤게이트CC</span>
+    </div>
+    <div class="round-body">
+      <div class="group-row"><span class="group-label course-gate">1조 (게이트)</span><span class="group-time">11:45</span><div class="player-list"><span class="player">김기웅</span><span class="player">천규민</span><span class="player">이수형</span><span class="player">유창우</span></div></div>
+      <div class="group-row"><span class="group-label course-gate">2조 (게이트)</span><span class="group-time">11:52</span><div class="player-list"><span class="player">탁승우</span><span class="player">홍준오</span><span class="player">이재원</span><span class="player">정지환</span></div></div>
+      <div class="group-row"><span class="group-label course-stone">3조 (스톤)</span><span class="group-time">11:52</span><div class="player-list"><span class="player">이민호</span><span class="player">장재연</span><span class="player">강현명</span><span class="player">박정태</span></div></div>
+    </div>
+  </div>
+
+  <!-- 26.3 스톤게이트 -->
+  <div id="jo4" class="round-card">
+    <div class="round-head">
+      <span class="r-title">3월 14일 (토) — 스톤게이트CC</span>
+    </div>
+    <div class="round-body">
+      <div class="group-row"><span class="group-label course-stone">1조 (스톤)</span><span class="group-time">16:30</span><div class="player-list"><span class="player">김기웅</span><span class="player">탁승우</span><span class="player">오대한</span><span class="player">윤혁진</span></div></div>
+      <div class="group-row"><span class="group-label course-stone">2조 (스톤)</span><span class="group-time">16:37</span><div class="player-list"><span class="player">박찬복</span><span class="player">이용희</span><span class="player">정지환</span><span class="player">이재원</span></div></div>
+      <div class="group-row"><span class="group-label course-stone">3조 (스톤)</span><span class="group-time">16:44</span><div class="player-list"><span class="player">천규민</span><span class="player">이수형</span><span class="player">정효영</span><span class="player">강현명</span></div></div>
+      <div class="group-row"><span class="group-label course-gate">4조 (게이트)</span><span class="group-time">16:30</span><div class="player-list"><span class="player">김기현</span><span class="player">김동환</span><span class="player">박정태</span><span class="player">장재연</span></div></div>
+    </div>
+  </div>
+
+  <!-- 26.4 통도 -->
+  <div id="jo5" class="round-card active">
+    <div class="round-head">
+      <span class="r-title">4월 11일 (토) — 통도CC</span>
+    </div>
+    <div class="round-body">
+      <div class="group-row"><span class="group-label course-out">1조 (남OUT)</span><span class="group-time">17:26</span><div class="player-list"><span class="player">김기웅</span><span class="player">강진구</span><span class="player">이재원</span><span class="player">장재연</span></div></div>
+      <div class="group-row"><span class="group-label course-out">2조 (남OUT)</span><span class="group-time">17:33</span><div class="player-list"><span class="player">박찬복</span><span class="player">유창우</span><span class="player">이수형</span><span class="player">정지환</span></div></div>
+      <div class="group-row"><span class="group-label course-in">3조 (남IN)</span><span class="group-time">17:26</span><div class="player-list"><span class="player">김기현</span><span class="player">김기현(W)</span><span class="player">박정태(W)</span><span class="player">강현명(W)</span></div></div>
+      <div class="group-row"><span class="group-label course-in">4조 (남IN)</span><span class="group-time">17:33</span><div class="player-list"><span class="player">윤혁진</span><span class="player">탁승우</span><span class="player">박정태</span><span class="player">강현명</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     핸디 패널
+══════════════════════════════════════ -->
+<section id="tab-handy" class="panel">
+  <h2 class="panel-title">핸디</h2>
+  <div class="card">
+    <div class="card-head">📊 핸디</div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>이름</th><th>기준핸디</th>
+            <th>25.12 더골프</th><th>26.1 서라벌</th><th>26.2 스톤</th><th>26.3 스톤</th><th>26.4 통도</th><th>평균핸디</th>
+          </tr></thead>
+          <tbody>
+            <tr><td>유창우</td><td class="c">87</td><td class="c">0</td><td class="c">0</td><td class="c">88</td><td class="c">0</td><td class="c">82</td><td class="c handy-hi">85</td></tr>
+            <tr><td>오대한</td><td class="c">81</td><td class="c">0</td><td class="c">0</td><td class="c">0</td><td class="c">94</td><td class="c">0</td><td class="c handy-hi">87</td></tr>
+            <tr><td>이재원</td><td class="c">86</td><td class="c">90</td><td class="c">86</td><td class="c">89</td><td class="c">94</td><td class="c">84</td><td class="c handy-hi">88</td></tr>
+            <tr><td>김기웅</td><td class="c">86</td><td class="c">94</td><td class="c">87</td><td class="c">88</td><td class="c">94</td><td class="c">80</td><td class="c handy-hi">88</td></tr>
+            <tr><td>윤혁진</td><td class="c">91</td><td class="c">91</td><td class="c">0</td><td class="c">0</td><td class="c">86</td><td class="c">86</td><td class="c handy-hi">88</td></tr>
+            <tr><td>박찬복</td><td class="c">86</td><td class="c">0</td><td class="c">0</td><td class="c">0</td><td class="c">94</td><td class="c">85</td><td class="c handy-hi">88</td></tr>
+            <tr><td>탁승우</td><td class="c">86</td><td class="c">88</td><td class="c">96</td><td class="c">93</td><td class="c">103</td><td class="c">87</td><td class="c handy-hi">92</td></tr>
+            <tr><td>정효영</td><td class="c">93</td><td class="c">94</td><td class="c">93</td><td class="c">0</td><td class="c">97</td><td class="c">0</td><td class="c handy-hi">94</td></tr>
+            <tr><td>천규민</td><td class="c">90</td><td class="c">0</td><td class="c">0</td><td class="c">96</td><td class="c">96</td><td class="c">0</td><td class="c handy-hi">94</td></tr>
+            <tr><td>김동환</td><td class="c">90</td><td class="c">0</td><td class="c">0</td><td class="c">0</td><td class="c">100</td><td class="c">0</td><td class="c handy-hi">95</td></tr>
+            <tr><td>이수형</td><td class="c">97</td><td class="c">97</td><td class="c">0</td><td class="c">91</td><td class="c">99</td><td class="c">96</td><td class="c handy-hi">96</td></tr>
+            <tr><td>박정태</td><td class="c">95</td><td class="c">0</td><td class="c">0</td><td class="c">98</td><td class="c">100</td><td class="c">99</td><td class="c handy-hi">98</td></tr>
+            <tr><td>이민호</td><td class="c">89</td><td class="c">95</td><td class="c">0</td><td class="c">110</td><td class="c">0</td><td class="c">0</td><td class="c handy-hi">98</td></tr>
+            <tr><td>강진구</td><td class="c">98</td><td class="c">0</td><td class="c">0</td><td class="c">0</td><td class="c">0</td><td class="c">98</td><td class="c handy-hi">98</td></tr>
+            <tr><td>김기현</td><td class="c">103</td><td class="c">103</td><td class="c">0</td><td class="c">0</td><td class="c">102</td><td class="c">100</td><td class="c handy-hi">102</td></tr>
+            <tr><td>강현명</td><td class="c">106</td><td class="c">104</td><td class="c">97</td><td class="c">110</td><td class="c">104</td><td class="c">106</td><td class="c handy-hi">104</td></tr>
+            <tr><td>장재연</td><td class="c">100</td><td class="c">113</td><td class="c">99</td><td class="c">110</td><td class="c">107</td><td class="c">101</td><td class="c handy-hi">105</td></tr>
+            <tr><td>정지환</td><td class="c">97</td><td class="c">100</td><td class="c">0</td><td class="c">121</td><td class="c">110</td><td class="c">100</td><td class="c handy-hi">105</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:14px;font-size:.78rem;color:#888">※ 0은 해당 라운드 미참가를 의미합니다.</p>
+      <p style="margin-top:14px;font-weight:700;color:var(--g1);font-size:.88rem">여성부 (26.4 통도)</p>
+      <div class="tbl-wrap" style="margin-top:8px">
+        <table>
+          <thead><tr><th>이름</th><th>26.4 통도</th><th>평균핸디</th></tr></thead>
+          <tbody>
+            <tr><td>김은미</td><td class="c">94</td><td class="c handy-hi">94</td></tr>
+            <tr><td>최수정</td><td class="c">111</td><td class="c handy-hi">111</td></tr>
+            <tr><td>송은이</td><td class="c">99</td><td class="c handy-hi">99</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     운영현황표 패널
+══════════════════════════════════════ -->
+<section id="tab-ops" class="panel">
+  <h2 class="panel-title">운영현황표</h2>
+
+  <div class="sub-bar">
+    <button class="sub-btn active" onclick="subTab('ops','sched',this)">📅 연간 일정표</button>
+    <button class="sub-btn" onclick="subTab('ops','budget',this)">💰 예산안</button>
+    <button class="sub-btn" onclick="subTab('ops','wolsuji',this)">📒 월 수지계산서</button>
+    <button class="sub-btn" onclick="subTab('ops','member',this)">👥 회원명부</button>
+    <button class="sub-btn" onclick="subTab('ops','award',this)">🏆 시상</button>
+  </div>
+
+  <!-- 연간 일정표 -->
+  <div id="ops-sched" class="sub-panel active">
+    <div class="card">
+      <div class="card-head">⛳ 2026년 골프에진심 연간 일정표</div>
+      <div class="card-body">
+        <p style="font-size:.8rem;color:#888;margin-bottom:14px">※ 골프장 사정에 따라 골프장 변동이 있을 수 있습니다.</p>
+        <div class="sched-grid">
+          <div class="sched-item"><div class="sched-no">No.1</div><div class="sched-date">1월 11일<span class="sched-day">일</span></div><div class="sched-venue">서라벌</div></div>
+          <div class="sched-item"><div class="sched-no">No.2</div><div class="sched-date">2월 22일<span class="sched-day">일</span></div><div class="sched-venue">스톤게이트</div></div>
+          <div class="sched-item"><div class="sched-no">No.3</div><div class="sched-date">3월 14일<span class="sched-day">토</span></div><div class="sched-venue">스톤게이트</div></div>
+          <div class="sched-item"><div class="sched-no">No.4</div><div class="sched-date">4월 11일<span class="sched-day">토</span></div><div class="sched-venue">통도</div></div>
+          <div class="sched-item contest"><div class="sched-no">No.5</div><div class="sched-date">5월 9일<span class="sched-day">토</span></div><div class="sched-venue">해운대비치CC</div><div class="sched-note">🏆 대회</div></div>
+          <div class="sched-item"><div class="sched-no">No.6</div><div class="sched-date">6월 13일<span class="sched-day">토</span></div><div class="sched-venue">해운대</div></div>
+          <div class="sched-item"><div class="sched-no">No.7</div><div class="sched-date">7월 11일<span class="sched-day">토</span></div><div class="sched-venue">울산</div></div>
+          <div class="sched-item"><div class="sched-no">No.8</div><div class="sched-date">8월 8일<span class="sched-day">토</span></div><div class="sched-venue">미정</div></div>
+          <div class="sched-item trip"><div class="sched-no">No.9</div><div class="sched-date">9월 12일<span class="sched-day">토</span></div><div class="sched-venue">블루원(3부) / 경주(1부)</div><div class="sched-note">🏆 대회 · 1박2일 원정</div></div>
+          <div class="sched-item contest"><div class="sched-no">No.10</div><div class="sched-date">10월 10일<span class="sched-day">토</span></div><div class="sched-venue">해운대</div></div>
+          <div class="sched-item"><div class="sched-no">No.11</div><div class="sched-date">11월 14일<span class="sched-day">토</span></div><div class="sched-venue">미정</div></div>
+          <div class="sched-item contest"><div class="sched-no">No.12</div><div class="sched-date">12월 13일<span class="sched-day">일</span></div><div class="sched-venue">스톤게이트</div><div class="sched-note">🏆 대회</div></div>
+        </div>
+        <p style="margin-top:16px;font-size:.8rem;color:#666">총 <strong>12회</strong> | 대회 <strong>3회</strong> | 원정 <strong>1회(9월 1박2일)</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 예산안 -->
+  <div id="ops-budget" class="sub-panel">
+    <div class="card">
+      <div class="card-head">💰 26년 예산안</div>
+      <div class="card-body">
+        <div class="budget-summary">
+          <div class="budget-box"><h3>수입 합계</h3><div class="budget-amount" style="color:#2d6635">3,400,000원</div><p style="font-size:.78rem;color:#888;margin-top:6px">회비수입 3,000,000 + 찬조수입 400,000</p></div>
+          <div class="budget-box"><h3>지출 합계</h3><div class="budget-amount" style="color:#a53c2a">3,400,000원</div></div>
+        </div>
+        <p style="font-size:.85rem;font-weight:700;color:var(--g1);margin-bottom:10px">수입 내역</p>
+        <div class="tbl-wrap" style="margin-bottom:20px">
+          <table>
+            <thead><tr><th>항목</th><th>단가</th><th>인원/횟수</th><th>합계</th></tr></thead>
+            <tbody>
+              <tr><td>회비수입</td><td class="r">200,000원</td><td class="c">16명</td><td class="r">3,000,000원</td></tr>
+              <tr><td>찬조수입</td><td class="r">400,000원</td><td class="c">-</td><td class="r">400,000원</td></tr>
+              <tr class="total-row"><td colspan="3" class="c">합계</td><td class="r">3,400,000원</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:.85rem;font-weight:700;color:var(--g1);margin-bottom:10px">지출 내역 및 집행 현황</p>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>항목</th><th>단가</th><th>횟수</th><th>예산</th><th>1월</th><th>2월</th><th>3월</th><th>4월</th><th>소계</th></tr></thead>
+            <tbody>
+              <tr><td>식대(3월~9월)</td><td class="r">150,000</td><td class="c">9</td><td class="r">1,350,000</td><td class="c">-</td><td class="c">-</td><td class="r">172,000</td><td class="r">133,400</td><td class="r">305,400</td></tr>
+              <tr><td>식대(1·2·12월)</td><td class="r">200,000</td><td class="c">3</td><td class="r">600,000</td><td class="r">94,000</td><td class="r">253,000</td><td class="c">-</td><td class="c">-</td><td class="r">347,000</td></tr>
+              <tr><td>골드메달</td><td class="r">20,000</td><td class="c">9</td><td class="r">180,000</td><td class="r">20,000</td><td class="r">20,000</td><td class="r">20,000</td><td class="r">20,000</td><td class="r">80,000</td></tr>
+              <tr><td>우승</td><td class="r">20,000</td><td class="c">9</td><td class="r">180,000</td><td class="r">20,000</td><td class="r">20,000</td><td class="r">20,000</td><td class="r">20,000</td><td class="r">80,000</td></tr>
+              <tr><td>롱기</td><td class="r">10,000</td><td class="c">9</td><td class="r">90,000</td><td class="c">-</td><td class="r">10,000</td><td class="r">10,000</td><td class="r">10,000</td><td class="r">30,000</td></tr>
+              <tr><td>니어</td><td class="r">10,000</td><td class="c">9</td><td class="r">90,000</td><td class="c">-</td><td class="r">10,000</td><td class="r">10,000</td><td class="c">-</td><td class="r">20,000</td></tr>
+              <tr><td>아차상</td><td class="r">10,000</td><td class="c">9</td><td class="r">90,000</td><td class="r">10,000</td><td class="r">10,000</td><td class="r">10,000</td><td class="r">10,000</td><td class="r">40,000</td></tr>
+              <tr><td>대회 골드메달(5·10·12월)</td><td class="r">40,000</td><td class="c">3</td><td class="r">120,000</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="r">0</td></tr>
+              <tr><td>대회 우승(5·10·12월)</td><td class="r">40,000</td><td class="c">3</td><td class="r">120,000</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="r">0</td></tr>
+              <tr><td>대회 롱기(5·10·12월)</td><td class="r">20,000</td><td class="c">3</td><td class="r">60,000</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="r">0</td></tr>
+              <tr><td>대회 니어(5·10·12월)</td><td class="r">20,000</td><td class="c">3</td><td class="r">60,000</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="r">0</td></tr>
+              <tr><td>대회 아차상(5·10·12월)</td><td class="r">20,000</td><td class="c">3</td><td class="r">60,000</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="r">0</td></tr>
+              <tr><td>대회 그린피지원(5·10·12월)</td><td class="r">-</td><td class="c">2</td><td class="r">400,000</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="r">0</td></tr>
+              <tr class="total-row"><td colspan="3" class="c">합계</td><td class="r">3,400,000</td><td class="r">144,000</td><td class="r">323,000</td><td class="r">242,000</td><td class="r">193,400</td><td class="r">902,400</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:12px;font-size:.75rem;color:#888">※ 당초 대회 그린피 지원은 연 3회였으나, 3부 종료 후 식사 방침 변경으로 5월(1인 2만원)·10월(1인 1만원) 각 2회 지원으로 조정됨.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 월 수지계산서 -->
+  <div id="ops-wolsuji" class="sub-panel">
+    <div id="ops-ws">
+    <div class="sub-bar" style="margin-bottom:16px">
+      <button class="sub-btn active" onclick="subTab('ops-ws','w5',this)">26.4월</button>
+      <button class="sub-btn" onclick="subTab('ops-ws','w4',this)">26.3월</button>
+      <button class="sub-btn" onclick="subTab('ops-ws','w3',this)">26.2월</button>
+      <button class="sub-btn" onclick="subTab('ops-ws','w2',this)">26.1월</button>
+      <button class="sub-btn" onclick="subTab('ops-ws','w1',this)">25.12월</button>
+    </div>
+    <!-- 26.4(4) -->
+    <div id="ops-ws-w5" class="sub-panel active">
+      <div class="card">
+        <div class="card-head">골프에진심 26.3월15일~4월12일 결산서 (4회)</div>
+        <div class="card-body">
+          <div class="income-expense">
+            <div class="ie-block ie-income"><div class="ie-head">수입</div>
+              <table><thead><tr><th>일자</th><th>내용</th><th>금액</th><th>비고</th></tr></thead><tbody>
+                <tr><td>2026.3.15</td><td>전기이월금</td><td class="r">1,951,310</td><td>전기 이월금</td></tr>
+                <tr><td>2026.3.16</td><td>회비수입 (김동환)</td><td class="r">150,000</td><td></td></tr>
+                <tr><td>2026.3.28</td><td>이자수익</td><td class="r">145</td><td></td></tr>
+                <tr><td>2026.4.12</td><td>찬조수입 (김기웅)</td><td class="r">300,000</td><td>피부시술권</td></tr>
+                <tr><td>-</td><td>찬조수입 (박찬복)</td><td class="r">80,000</td><td>골프공1더즌 (타이틀)</td></tr>
+                <tr><td>-</td><td>찬조수입 (박정태)</td><td class="r">80,000</td><td>골프공1더즌 (타이틀)</td></tr>
+                <tr><td>-</td><td>찬조수입 (김기현)</td><td class="r">60,000</td><td>골프공 6구 세트 (타이틀)</td></tr>
+                <tr><td>-</td><td>찬조수입 (강현명)</td><td class="r">30,000</td><td>현금</td></tr>
+                <tr class="total-row"><td colspan="2">합계</td><td class="r">2,651,455</td><td></td></tr>
+              </tbody></table>
+            </div>
+            <div class="ie-block ie-expense"><div class="ie-head">지출</div>
+              <table><thead><tr><th>일자</th><th>내용</th><th>금액</th><th>비고</th></tr></thead><tbody>
+                <tr><td>2026.4.12</td><td>식대</td><td class="r">133,400</td><td>오꾸닭</td></tr>
+                <tr><td>-</td><td>시상</td><td class="r">60,000</td><td>우승·골드메달 각2만원, 아차상·롱기 각1만원</td></tr>
+                <tr><td>-</td><td>찬조지출</td><td class="r">550,000</td><td>피부시술권, 골프공1더즌×2, 골프공6구, 현금</td></tr>
+                <tr class="total-row"><td colspan="2">합계</td><td class="r">743,400</td><td></td></tr>
+              </tbody></table>
+            </div>
+          </div>
+          <div style="background:var(--g4);border-radius:8px;padding:12px 16px;margin-top:14px;display:flex;gap:30px;flex-wrap:wrap">
+            <div><span style="font-size:.8rem;color:#666">수입 합계</span><br><strong style="font-size:1.1rem;color:#2d6635">2,651,455원</strong></div>
+            <div><span style="font-size:.8rem;color:#666">지출 합계</span><br><strong style="font-size:1.1rem;color:#a53c2a">743,400원</strong></div>
+            <div><span style="font-size:.8rem;color:#666">차월 이월잔액</span><br><strong style="font-size:1.2rem;color:var(--g1)">1,908,055원</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 26.3(3) -->
+    <div id="ops-ws-w4" class="sub-panel">
+      <div class="card">
+        <div class="card-head">골프에진심 26.2월23일~3월14일 결산서 (3회)</div>
+        <div class="card-body">
+          <div class="income-expense">
+            <div class="ie-block ie-income"><div class="ie-head">수입</div>
+              <table><thead><tr><th>일자</th><th>내용</th><th>금액</th><th>비고</th></tr></thead><tbody>
+                <tr><td>2026.2.23</td><td>전기이월금</td><td class="r">2,073,121</td><td>전기 이월금</td></tr>
+                <tr><td>2026.2.24</td><td>회비수입 (박찬복)</td><td class="r">150,000</td><td>일요일 종교행사로 불참</td></tr>
+                <tr><td>2026.2.28</td><td>이자수익</td><td class="r">189</td><td></td></tr>
+                <tr><td>2026.2.28</td><td>잡이익</td><td class="r">50,000</td><td>강현명·이수형·정효영·이재원 입금 (30,000원 미수)</td></tr>
+                <tr class="total-row"><td colspan="2">합계</td><td class="r">2,273,310</td><td></td></tr>
+              </tbody></table>
+            </div>
+            <div class="ie-block ie-expense"><div class="ie-head">지출</div>
+              <table><thead><tr><th>일자</th><th>내용</th><th>금액</th><th>비고</th></tr></thead><tbody>
+                <tr><td>2026.3.14</td><td>식대</td><td class="r">172,000</td><td>본스치킨</td></tr>
+                <tr><td>2026.3.14</td><td>시상</td><td class="r">70,000</td><td>우승·골드메달 각2만원, 아차상·팀우승·니어·롱기 각1만원</td></tr>
+                <tr><td>2026.3.14</td><td>순위맞추기 시상</td><td class="r">80,000</td><td>박찬복, 박정태</td></tr>
+                <tr class="total-row"><td colspan="2">합계</td><td class="r">322,000</td><td></td></tr>
+              </tbody></table>
+            </div>
+          </div>
+          <div style="background:var(--g4);border-radius:8px;padding:12px 16px;margin-top:14px;display:flex;gap:30px;flex-wrap:wrap">
+            <div><span style="font-size:.8rem;color:#666">수입 합계</span><br><strong style="font-size:1.1rem;color:#2d6635">2,273,310원</strong></div>
+            <div><span style="font-size:.8rem;color:#666">지출 합계</span><br><strong style="font-size:1.1rem;color:#a53c2a">322,000원</strong></div>
+            <div><span style="font-size:.8rem;color:#666">차월 이월잔액</span><br><strong style="font-size:1.2rem;color:var(--g1)">1,951,310원</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 26.2(2) -->
+    <div id="ops-ws-w3" class="sub-panel">
+      <div class="card">
+        <div class="card-head">골프에진심 26.1월12일~2월22일 결산서 (2회)</div>
+        <div class="card-body">
+          <div class="income-expense">
+            <div class="ie-block ie-income"><div class="ie-head">수입</div>
+              <table><thead><tr><th>일자</th><th>내용</th><th>금액</th><th>비고</th></tr></thead><tbody>
+                <tr><td>2026.1.11</td><td>전기이월금</td><td class="r">2,116,000</td><td>전기 이월금</td></tr>
+                <tr><td>2026.1.12</td><td>회비수입 (박정태)</td><td class="r">200,000</td><td></td></tr>
+                <tr><td>2026.1.24</td><td>이자수익</td><td class="r">121</td><td></td></tr>
+                <tr><td>2026.2.22</td><td>잡이익 (순위맞추기)</td><td class="r">100,000</td><td></td></tr>
+                <tr class="total-row"><td colspan="2">합계</td><td class="r">2,416,121</td><td></td></tr>
+              </tbody></table>
+            </div>
+            <div class="ie-block ie-expense"><div class="ie-head">지출</div>
+              <table><thead><tr><th>일자</th><th>내용</th><th>금액</th><th>비고</th></tr></thead><tbody>
+                <tr><td>2026.1.11</td><td>식대</td><td class="r">253,000</td><td>달음산왕소금구이</td></tr>
+                <tr><td>2026.1.11</td><td>시상</td><td class="r">90,000</td><td>우승·골드메달 각2만원, 아차상·팀우승·니어·롱기 각1만원</td></tr>
+                <tr class="total-row"><td colspan="2">합계</td><td class="r">343,000</td><td></td></tr>
+              </tbody></table>
+            </div>
+          </div>
+          <div style="background:var(--g4);border-radius:8px;padding:12px 16px;margin-top:14px;display:flex;gap:30px;flex-wrap:wrap">
+            <div><span style="font-size:.8rem;color:#666">수입 합계</span><br><strong style="font-size:1.1rem;color:#2d6635">2,416,121원</strong></div>
+            <div><span style="font-size:.8rem;color:#666">지출 합계</span><br><strong style="font-size:1.1rem;color:#a53c2a">343,000원</strong></div>
+            <div><span style="font-size:.8rem;color:#666">차월 이월잔액</span><br><strong style="font-size:1.2rem;color:var(--g1)">2,073,121원</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 26.1 -->
+    <div id="ops-ws-w2" class="sub-panel">
+      <div class="card">
+        <div class="card-head">골프에진심 26.1월 결산서</div>
+        <div class="card-body">
+          <div class="income-expense">
+            <div class="ie-block ie-income"><div class="ie-head">수입</div>
+              <table><thead><tr><th>일자</th><th>내용</th><th>금액</th><th>비고</th></tr></thead><tbody>
+                <tr><td>2025.12.31</td><td>전기이월금</td><td class="r">600,000</td><td>전기 이월금</td></tr>
+                <tr><td>2025.1.2</td><td>회비수입 (이재원)</td><td class="r">200,000</td><td></td></tr>
+                <tr><td>2025.1.5</td><td>회비수입 (탁승우)</td><td class="r">200,000</td><td></td></tr>
+                <tr><td>-</td><td>회비수입 (유창우)</td><td class="r">200,000</td><td></td></tr>
+                <tr><td>-</td><td>회비수입 (정효영)</td><td class="r">200,000</td><td></td></tr>
+                <tr><td>-</td><td>회비수입 (김기웅)</td><td class="r">200,000</td><td></td></tr>
+                <tr><td>-</td><td>회비수입 (장재연)</td><td class="r">200,000</td><td></td></tr>
+                <tr><td>-</td><td>회비수입 (윤혁진)</td><td class="r">200,000</td><td></td></tr>
+                <tr><td>-</td><td>회비수입 (이수형)</td><td class="r">200,000</td><td></td></tr>
+                <tr><td>2026.1.11</td><td>잡이익 (순위맞추기)</td><td class="r">70,000</td><td></td></tr>
+                <tr class="total-row"><td colspan="2">합계</td><td class="r">2,270,000</td><td></td></tr>
+              </tbody></table>
+            </div>
+            <div class="ie-block ie-expense"><div class="ie-head">지출</div>
+              <table><thead><tr><th>일자</th><th>내용</th><th>금액</th><th>비고</th></tr></thead><tbody>
+                <tr><td>2026.1.11</td><td>식대</td><td class="r">94,000</td><td>진짜순대집</td></tr>
+                <tr><td>2026.1.11</td><td>시상</td><td class="r">60,000</td><td>우승·골드메달 각2만원, 아차상·팀우승 각1만원</td></tr>
+                <tr class="total-row"><td colspan="2">합계</td><td class="r">154,000</td><td></td></tr>
+              </tbody></table>
+            </div>
+          </div>
+          <div style="background:var(--g4);border-radius:8px;padding:12px 16px;margin-top:14px;display:flex;gap:30px;flex-wrap:wrap">
+            <div><span style="font-size:.8rem;color:#666">수입 합계</span><br><strong style="font-size:1.1rem;color:#2d6635">2,270,000원</strong></div>
+            <div><span style="font-size:.8rem;color:#666">지출 합계</span><br><strong style="font-size:1.1rem;color:#a53c2a">154,000원</strong></div>
+            <div><span style="font-size:.8rem;color:#666">차월 이월잔액</span><br><strong style="font-size:1.2rem;color:var(--g1)">2,116,000원</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 25.12 -->
+    <div id="ops-ws-w1" class="sub-panel">
+      <div class="card">
+        <div class="card-head">골프에진심 25.12월 결산서</div>
+        <div class="card-body">
+          <div class="income-expense">
+            <div class="ie-block ie-income"><div class="ie-head">수입</div>
+              <table><thead><tr><th>일자</th><th>내용</th><th>금액</th><th>비고</th></tr></thead><tbody>
+                <tr><td>2025.11.30</td><td>전기이월금</td><td class="r">230,361</td><td>전기 이월금</td></tr>
+                <tr><td>-</td><td>김기웅 찬조금</td><td class="r">150,000</td><td>골프공2더즌, 현금50,000원</td></tr>
+                <tr><td>-</td><td>이재원 찬조금</td><td class="r">97,639</td><td>현금62,639원, 현수막35,000원</td></tr>
+                <tr><td>2025.12.27</td><td>회비수입 (강현명)</td><td class="r">200,000</td><td></td></tr>
+                <tr><td>-</td><td>회비수입 (이민호)</td><td class="r">200,000</td><td></td></tr>
+                <tr><td>2025.12.28</td><td>회비수입 (정지환)</td><td class="r">200,000</td><td></td></tr>
+                <tr class="total-row"><td colspan="2">합계</td><td class="r">1,078,000</td><td></td></tr>
+              </tbody></table>
+            </div>
+            <div class="ie-block ie-expense"><div class="ie-head">지출</div>
+              <table><thead><tr><th>일자</th><th>내용</th><th>금액</th><th>비고</th></tr></thead><tbody>
+                <tr><td>2025.12.14</td><td>카트비지원</td><td class="r">150,000</td><td>2.5만원×6</td></tr>
+                <tr><td>2025.12.14</td><td>저녁식대</td><td class="r">173,000</td><td></td></tr>
+                <tr><td>2025.12.14</td><td>시상</td><td class="r">120,000</td><td>우승·골드메달 각 골프공1더즌, 롱기·니어 각 1만원</td></tr>
+                <tr><td>2025.12.14</td><td>현수막</td><td class="r">35,000</td><td></td></tr>
+                <tr class="total-row"><td colspan="2">합계</td><td class="r">478,000</td><td></td></tr>
+              </tbody></table>
+            </div>
+          </div>
+          <div style="background:var(--g4);border-radius:8px;padding:12px 16px;margin-top:14px;display:flex;gap:30px;flex-wrap:wrap">
+            <div><span style="font-size:.8rem;color:#666">수입 합계</span><br><strong style="font-size:1.1rem;color:#2d6635">1,078,000원</strong></div>
+            <div><span style="font-size:.8rem;color:#666">지출 합계</span><br><strong style="font-size:1.1rem;color:#a53c2a">478,000원</strong></div>
+            <div><span style="font-size:.8rem;color:#666">차월 이월잔액</span><br><strong style="font-size:1.2rem;color:var(--g1)">600,000원</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div><!-- /ops-ws -->
+  </div>
+
+  <!-- 회원명부 -->
+  <div id="ops-member" class="sub-panel">
+    <div class="card">
+      <div class="card-head">👥 회원명부</div>
+      <div class="card-body">
+        <div class="member-grid">
+          <div class="member-card"><div><div class="member-name">강진구</div><div class="member-note">5월 신규가입</div></div><div><div class="member-fee">130,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">강현명</div></div><div><div class="member-fee">200,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">김기웅</div></div><div><div class="member-fee">200,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">김기현</div><div class="member-note">3월부터 참석(허리부상)</div></div><div><div class="member-fee">150,000원</div><div style="font-size:.8rem;color:#c44">미납</div></div></div>
+          <div class="member-card"><div><div class="member-name">김동환</div><div class="member-note">3월 신규가입</div></div><div><div class="member-fee">150,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">박정태</div></div><div><div class="member-fee">200,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">박찬복</div><div class="member-note">일요일 종교행사 참석</div></div><div><div class="member-fee">150,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">유창우</div></div><div><div class="member-fee">200,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">윤혁진</div></div><div><div class="member-fee">200,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">이민호</div></div><div><div class="member-fee">200,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">이수형</div></div><div><div class="member-fee">200,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">이재원</div></div><div><div class="member-fee">200,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">장재연</div></div><div><div class="member-fee">200,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">정지환</div></div><div><div class="member-fee">200,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">정효영</div></div><div><div class="member-fee">200,000원</div><div class="member-paid">납부 ✓</div></div></div>
+          <div class="member-card"><div><div class="member-name">천규민</div><div class="member-note">3월 신규가입</div></div><div><div class="member-fee">150,000원</div><div style="font-size:.8rem;color:#c44">미납</div></div></div>
+          <div class="member-card"><div><div class="member-name">탁승우</div></div><div><div class="member-fee">200,000원</div><div class="member-paid">납부 ✓</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 시상 -->
+  <div id="ops-award" class="sub-panel">
+    <div class="card">
+      <div class="card-head">🏆 시상 내역</div>
+      <div class="card-body">
+        <div class="award-month">
+          <div class="award-month-title">26년 1월</div>
+          <div class="award-grid">
+            <div class="award-item"><div class="award-label">우승</div><div class="award-winner">강현명</div><div class="award-prize">2만원</div></div>
+            <div class="award-item"><div class="award-label">골드메달</div><div class="award-winner">이재원</div><div class="award-prize">2만원</div></div>
+            <div class="award-item"><div class="award-label">아차상</div><div class="award-winner">장재연</div><div class="award-prize">1만원</div></div>
+            <div class="award-item"><div class="award-label">팀우승</div><div class="award-winner">김기웅</div><div class="award-prize">1만원</div></div>
+          </div>
+        </div>
+        <div class="award-month">
+          <div class="award-month-title">26년 2월</div>
+          <div class="award-grid">
+            <div class="award-item"><div class="award-label">우승</div><div class="award-winner">이수형</div><div class="award-prize">2만원</div></div>
+            <div class="award-item"><div class="award-label">골드메달</div><div class="award-winner">김기웅</div><div class="award-prize">2만원</div></div>
+            <div class="award-item"><div class="award-label">아차상</div><div class="award-winner">정지환</div><div class="award-prize">1만원</div></div>
+            <div class="award-item"><div class="award-label">팀우승</div><div class="award-winner">이수형, 유창우</div><div class="award-prize">각 1만원</div></div>
+            <div class="award-item"><div class="award-label">롱기</div><div class="award-winner">이재원</div><div class="award-prize">1만원</div></div>
+            <div class="award-item"><div class="award-label">니어</div><div class="award-winner">탁승우</div><div class="award-prize">1만원</div></div>
+          </div>
+        </div>
+        <div class="award-month">
+          <div class="award-month-title">26년 3월</div>
+          <div class="award-grid">
+            <div class="award-item"><div class="award-label">우승</div><div class="award-winner">김기현</div><div class="award-prize">2만원</div></div>
+            <div class="award-item"><div class="award-label">골드메달</div><div class="award-winner">윤혁진</div><div class="award-prize">2만원</div></div>
+            <div class="award-item"><div class="award-label">아차상</div><div class="award-winner">장재연</div><div class="award-prize">1만원</div></div>
+            <div class="award-item"><div class="award-label">롱기</div><div class="award-winner">천규민</div><div class="award-prize">1만원</div></div>
+            <div class="award-item"><div class="award-label">니어</div><div class="award-winner">박찬복</div><div class="award-prize">1만원</div></div>
+          </div>
+        </div>
+        <div class="award-month">
+          <div class="award-month-title">26년 4월</div>
+          <div class="award-grid">
+            <div class="award-item"><div class="award-label">우승</div><div class="award-winner">정지환</div><div class="award-prize">2만원</div></div>
+            <div class="award-item"><div class="award-label">골드메달</div><div class="award-winner">김기웅</div><div class="award-prize">2만원</div></div>
+            <div class="award-item"><div class="award-label">아차상</div><div class="award-winner">장재연</div><div class="award-prize">1만원</div></div>
+            <div class="award-item"><div class="award-label">롱기</div><div class="award-winner">박찬복</div><div class="award-prize">1만원</div></div>
+          </div>
+        </div>
+        <div class="award-month" style="margin-top:20px">
+          <div class="award-month-title" style="color:#2a7fb0;border-color:#2a7fb0">26년 4월 여성부</div>
+          <div class="award-grid">
+            <div class="award-item" style="border-left:3px solid #2a7fb0"><div class="award-label">1위</div><div class="award-winner">김은미</div><div class="award-prize">골프공 1더즌 + 피부시술권</div></div>
+            <div class="award-item" style="border-left:3px solid #2a7fb0"><div class="award-label">2위</div><div class="award-winner">송은이</div><div class="award-prize">현금 3만원</div></div>
+            <div class="award-item" style="border-left:3px solid #2a7fb0"><div class="award-label">3위</div><div class="award-winner">최수정</div><div class="award-prize">골프공 6구</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     운영안내 패널
+══════════════════════════════════════ -->
+<section id="tab-guide" class="panel">
+  <h2 class="panel-title">운영안내</h2>
+  <div class="guide-wrap">
+    <img src="guide.png" alt="골프에진심 운영안내"/>
+  </div>
+</section>
+
+<footer>© 2026 골프에진심 골프서클 · GOLF WITH HEART · GWH</footer>
+
+<script>
+function mainTab(id, btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+function subTab(ns, id, btn){
+  const panel = document.getElementById('tab-'+ns) || document.getElementById(ns);
+  panel.querySelectorAll('.sub-panel').forEach(p=>p.classList.remove('active'));
+  panel.querySelectorAll('.sub-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(ns+'-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+function showRound(id){
+  document.querySelectorAll('.round-card').forEach(c=>c.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// 핸디 테이블 0 → —
+document.querySelectorAll('#tab-handy td.c').forEach(td=>{
+  if(td.textContent.trim()==='0'){
+    td.textContent='—';
+    td.style.color='#bbb';
+  }
+});
+</script>
+</body>
+</html>
