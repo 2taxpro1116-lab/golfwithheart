@@ -5,6 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>골프에진심 골프서클</title>
 <style>
+/* ── 비밀번호 화면 ── */
+#pw-screen{position:fixed;inset:0;background:var(--g1);display:flex;align-items:center;
+  justify-content:center;z-index:9999;flex-direction:column;gap:20px}
+#pw-screen .pw-logo{width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,.4)}
+#pw-screen h1{color:#fff;font-size:1.2rem;font-weight:700;letter-spacing:.05em}
+#pw-screen p{color:rgba(255,255,255,.7);font-size:.82rem}
+#pw-screen .pw-box{display:flex;flex-direction:column;align-items:center;gap:12px;width:260px}
+#pw-screen input{width:100%;padding:12px 16px;border-radius:10px;border:none;font-size:1rem;
+  text-align:center;outline:none;letter-spacing:.2em}
+#pw-screen button{width:100%;padding:12px;border-radius:10px;border:none;background:#fff;
+  color:var(--g1);font-weight:700;font-size:1rem;cursor:pointer}
+#pw-screen button:active{opacity:.85}
+#pw-screen .pw-err{color:#ffb3b3;font-size:.82rem;min-height:1.2em}
+</style>
 :root{
   --g1:#1a4a22;--g2:#2d6635;--g3:#4a8c57;--g4:#d4e9d8;
   --cream:#f7f2e8;--cream2:#ede7d5;--white:#fff;
@@ -165,6 +179,19 @@ footer{background:var(--g1);color:rgba(255,255,255,.55);text-align:center;
 </style>
 </head>
 <body>
+
+<!-- ══ 비밀번호 화면 ══ -->
+<div id="pw-screen">
+  <img class="pw-logo" src="emblem.png" alt="GWH"/>
+  <h1>골프에진심</h1>
+  <p>비밀번호를 입력하세요</p>
+  <div class="pw-box">
+    <input id="pw-input" type="password" inputmode="numeric" maxlength="20" placeholder="••••"
+      onkeydown="if(event.key==='Enter')checkPw()"/>
+    <button onclick="checkPw()">확인</button>
+    <span class="pw-err" id="pw-err"></span>
+  </div>
+</div>
 
 <!-- ══ 헤더 ══ -->
 <header>
@@ -942,6 +969,26 @@ document.querySelectorAll('#tab-handy td.c').forEach(td=>{
     td.style.color='#bbb';
   }
 });
+
+// 비밀번호
+(function(){
+  if(sessionStorage.getItem('gwh_auth')==='1'){
+    document.getElementById('pw-screen').style.display='none';
+  } else {
+    setTimeout(()=>document.getElementById('pw-input').focus(),100);
+  }
+})();
+function checkPw(){
+  const v=document.getElementById('pw-input').value;
+  if(v==='1'){
+    sessionStorage.setItem('gwh_auth','1');
+    document.getElementById('pw-screen').style.display='none';
+  } else {
+    document.getElementById('pw-err').textContent='비밀번호가 틀렸습니다';
+    document.getElementById('pw-input').value='';
+    document.getElementById('pw-input').focus();
+  }
+}
 </script>
 </body>
 </html>
