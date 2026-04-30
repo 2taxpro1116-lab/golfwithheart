@@ -208,6 +208,7 @@ footer{background:var(--g1);color:rgba(255,255,255,.55);text-align:center;
 <nav class="tab-bar">
   <button class="tab-btn active" onclick="mainTab('jo',this)">조편성표</button>
   <button class="tab-btn" onclick="mainTab('handy',this)">핸디</button>
+  <button class="tab-btn" onclick="mainTab('notice',this)">공지</button>
   <button class="tab-btn" onclick="mainTab('ops',this)">운영현황표</button>
   <button class="tab-btn" onclick="mainTab('guide',this)">운영안내</button>
 </nav>
@@ -572,6 +573,54 @@ footer{background:var(--g1);color:rgba(255,255,255,.55);text-align:center;
           </tbody>
         </table>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     공지 패널
+══════════════════════════════════════ -->
+<section id="tab-notice" class="panel">
+  <h2 class="panel-title">공지</h2>
+  <div class="card">
+    <div class="card-head">📢 골프에진심 라운드 기본 규칙</div>
+    <div class="card-body">
+      <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px">
+        <li style="display:flex;gap:12px;align-items:flex-start">
+          <span style="min-width:26px;height:26px;border-radius:50%;background:var(--g1);color:#fff;font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center">1</span>
+          <span style="line-height:1.6">스코어는 정확히 기재한다.</span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start">
+          <span style="min-width:26px;height:26px;border-radius:50%;background:var(--g1);color:#fff;font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center">2</span>
+          <span style="line-height:1.6">공이 페어웨이 디봇에 떨어진 경우, 한 클럽 이내 리플레이스 가능. <span style="color:#a53c2a;font-weight:600">러프는 제외.</span></span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start">
+          <span style="min-width:26px;height:26px;border-radius:50%;background:var(--g1);color:#fff;font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center">3</span>
+          <span style="line-height:1.6">공이 벙커 안 발자국에 위치한 경우 리플레이스 가능.</span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start">
+          <span style="min-width:26px;height:26px;border-radius:50%;background:var(--g1);color:#fff;font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center">4</span>
+          <span style="line-height:1.6">공이 카트 도로에 위치한 경우, 카트 도로 안쪽으로 2클럽 이내 드롭.</span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start">
+          <span style="min-width:26px;height:26px;border-radius:50%;background:var(--g1);color:#fff;font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center">5</span>
+          <span style="line-height:1.6">
+            <strong>컨시드 거리</strong><br>
+            <span style="display:inline-flex;gap:6px;align-items:center;margin-top:4px">
+              <span style="background:var(--g4);color:var(--g1);border-radius:6px;padding:2px 8px;font-size:.82rem;font-weight:600">파 이하</span>
+              <span>퍼터 쇠까지</span>
+            </span><br>
+            <span style="display:inline-flex;gap:6px;align-items:center;margin-top:4px">
+              <span style="background:#fde8e4;color:#a53c2a;border-radius:6px;padding:2px 8px;font-size:.82rem;font-weight:600">보기 이상</span>
+              <span>퍼터 전체</span>
+            </span>
+          </span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start">
+          <span style="min-width:26px;height:26px;border-radius:50%;background:var(--g1);color:#fff;font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center">6</span>
+          <span style="line-height:1.6">그 외는 골프장 기본 룰에 따름.</span>
+        </li>
+      </ul>
     </div>
   </div>
 </section>
