@@ -102,6 +102,8 @@ td.c{text-align:center}
 .course-hill{background:#6b3fa0}
 .course-out{background:#1a7a6a}
 .course-in{background:#a04030}
+.course-mountain{background:#7a5c1e}
+.course-ocean{background:#0d6e8a}
 .group-time{color:var(--text2);font-size:.8rem;min-width:64px}
 .player-list{display:flex;flex-wrap:wrap;gap:6px}
 .player{background:var(--g4);color:var(--g1);border-radius:8px;padding:4px 12px;
@@ -455,6 +457,7 @@ footer{background:var(--g1);color:rgba(255,255,255,.55);text-align:center;
 
   <div class="jo-select-wrap">
     <select class="jo-select" onchange="showRound(this.value)">
+      <option value="jo6">26년 5월 9일 — 해운대비치CC</option>
       <option value="jo5">26년 4월 11일 — 통도CC</option>
       <option value="jo4">26년 3월 14일 — 스톤게이트CC</option>
       <option value="jo3">26년 2월 22일 — 스톤게이트CC</option>
@@ -511,8 +514,22 @@ footer{background:var(--g1);color:rgba(255,255,255,.55);text-align:center;
     </div>
   </div>
 
+  <!-- 26.5 해운대비치CC -->
+  <div id="jo6" class="round-card active">
+    <div class="round-head">
+      <span class="r-title">5월 9일 (토) — 해운대비치CC</span>
+    </div>
+    <div class="round-body">
+      <div class="group-row"><span class="group-label course-mountain">1조 (마운틴)</span><span class="group-time">17:07</span><div class="player-list"><span class="player">김기웅</span><span class="player">윤혁진</span><span class="player">오대한</span><span class="player">김연우</span></div></div>
+      <div class="group-row"><span class="group-label course-mountain">2조 (마운틴)</span><span class="group-time">17:14</span><div class="player-list"><span class="player">천규민</span><span class="player">이수형</span><span class="player">탁승우</span><span class="player">김재영</span></div></div>
+      <div class="group-row"><span class="group-label course-mountain">3조 (마운틴)</span><span class="group-time">17:21</span><div class="player-list"><span class="player">강현명</span><span class="player">김기현</span><span class="player">정지환</span><span class="player">김은미</span></div></div>
+      <div class="group-row"><span class="group-label course-ocean">4조 (오션)</span><span class="group-time">17:07</span><div class="player-list"><span class="player">이재원</span><span class="player">유창우</span><span class="player">이용희</span><span class="player">김성동</span></div></div>
+      <div class="group-row"><span class="group-label course-ocean">5조 (오션)</span><span class="group-time">17:14</span><div class="player-list"><span class="player">박정태</span><span class="player">장재연</span><span class="player">강진구</span><span class="player">황슬기</span></div></div>
+    </div>
+  </div>
+
   <!-- 26.4 통도 -->
-  <div id="jo5" class="round-card active">
+  <div id="jo5" class="round-card">
     <div class="round-head">
       <span class="r-title">4월 11일 (토) — 통도CC</span>
     </div>
