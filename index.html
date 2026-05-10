@@ -824,14 +824,55 @@ footer{background:var(--g1);color:rgba(255,255,255,.55);text-align:center;
   <div id="ops-wolsuji" class="sub-panel">
     <div id="ops-ws">
     <div class="sub-bar" style="margin-bottom:16px">
-      <button class="sub-btn active" onclick="subTab('ops-ws','w5',this)">26.4월</button>
+      <button class="sub-btn active" onclick="subTab('ops-ws','w6',this)">26.5월</button>
+      <button class="sub-btn" onclick="subTab('ops-ws','w5',this)">26.4월</button>
       <button class="sub-btn" onclick="subTab('ops-ws','w4',this)">26.3월</button>
       <button class="sub-btn" onclick="subTab('ops-ws','w3',this)">26.2월</button>
       <button class="sub-btn" onclick="subTab('ops-ws','w2',this)">26.1월</button>
       <button class="sub-btn" onclick="subTab('ops-ws','w1',this)">25.12월</button>
     </div>
+    <!-- 26.5(5) -->
+    <div id="ops-ws-w6" class="sub-panel active">
+      <div class="card">
+        <div class="card-head">골프에진심 26.4월13일~5월10일 결산서 (5회)</div>
+        <div class="card-body">
+          <div class="income-expense">
+            <div class="ie-block ie-income"><div class="ie-head">수입</div>
+              <table><thead><tr><th>일자</th><th>내용</th><th>금액</th><th>비고</th></tr></thead><tbody>
+                <tr><td>2026.4.12</td><td>전기이월금</td><td class="r">1,908,055</td><td>전기 이월금</td></tr>
+                <tr><td>2026.4.13</td><td>회비수입 (강진구)</td><td class="r">130,000</td><td></td></tr>
+                <tr><td>2026.4.25</td><td>이자수익</td><td class="r">139</td><td></td></tr>
+                <tr><td>2026.5.9</td><td>찬조수입 (김기웅)</td><td class="r">100,000</td><td>약산성클렌저, 썬크림, 현금 10만원</td></tr>
+                <tr><td>-</td><td>찬조수입 (이재원)</td><td class="r">120,000</td><td>현금 12만원</td></tr>
+                <tr><td>-</td><td>찬조수입 (천규민)</td><td class="r">50,000</td><td>현금 5만원</td></tr>
+                <tr><td>-</td><td>찬조수입 (정지환)</td><td class="r">60,000</td><td>골프공 1더즌 (혼마)</td></tr>
+                <tr><td>-</td><td>찬조수입 (강진구)</td><td class="r">50,000</td><td>골프공 1더즌 (볼빅)</td></tr>
+                <tr><td>-</td><td>찬조수입 (강현명)</td><td class="r">30,000</td><td>현금 3만원</td></tr>
+                <tr><td>-</td><td>찬조수입 (오대한)</td><td class="r">1,820,000</td><td>룸1회 + KPGA프로 레슨권 13매</td></tr>
+                <tr><td>2026.5.10</td><td>회비수입 (김성동)</td><td class="r">110,000</td><td></td></tr>
+                <tr class="total-row"><td colspan="2">합계</td><td class="r">4,378,194</td><td></td></tr>
+              </tbody></table>
+            </div>
+            <div class="ie-block ie-expense"><div class="ie-head">지출</div>
+              <table><thead><tr><th>일자</th><th>내용</th><th>금액</th><th>비고</th></tr></thead><tbody>
+                <tr><td>2026.5.9</td><td>식대</td><td class="r">250,000</td><td>족발 신선생</td></tr>
+                <tr><td>-</td><td>시상</td><td class="r">140,000</td><td>우승·골드메달 각4만원, 아차상·롱기·니어 각2만원</td></tr>
+                <tr><td>-</td><td>그린피지원</td><td class="r">280,000</td><td>회원 그린피지원 (인당 2만원)</td></tr>
+                <tr><td>-</td><td>찬조지출</td><td class="r">2,230,000</td><td>수입 찬조내역 참고</td></tr>
+                <tr class="total-row"><td colspan="2">합계</td><td class="r">2,900,000</td><td></td></tr>
+              </tbody></table>
+            </div>
+          </div>
+          <div style="background:var(--g4);border-radius:8px;padding:12px 16px;margin-top:14px;display:flex;gap:30px;flex-wrap:wrap">
+            <div><span style="font-size:.8rem;color:#666">수입 합계</span><br><strong style="font-size:1.1rem;color:#2d6635">4,378,194원</strong></div>
+            <div><span style="font-size:.8rem;color:#666">지출 합계</span><br><strong style="font-size:1.1rem;color:#a53c2a">2,900,000원</strong></div>
+            <div><span style="font-size:.8rem;color:#666">차월 이월잔액</span><br><strong style="font-size:1.2rem;color:var(--g1)">1,478,194원</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- 26.4(4) -->
-    <div id="ops-ws-w5" class="sub-panel active">
+    <div id="ops-ws-w5" class="sub-panel">
       <div class="card">
         <div class="card-head">골프에진심 26.3월15일~4월12일 결산서 (4회)</div>
         <div class="card-body">
