@@ -104,6 +104,8 @@ td.c{text-align:center}
 .course-in{background:#a04030}
 .course-mountain{background:#7a5c1e}
 .course-ocean{background:#0d6e8a}
+.course-east{background:#2a6a5e}
+.course-south{background:#7a4a2a}
 .group-time{color:var(--text2);font-size:.8rem;min-width:64px}
 .player-list{display:flex;flex-wrap:wrap;gap:6px}
 .player{background:var(--g4);color:var(--g1);border-radius:8px;padding:4px 12px;
@@ -460,6 +462,7 @@ footer{background:var(--g1);color:rgba(255,255,255,.55);text-align:center;
 
   <div class="jo-select-wrap">
     <select class="jo-select" onchange="showRound(this.value)">
+      <option value="jo7">26년 6월 13일 — 울산CC</option>
       <option value="jo6">26년 5월 9일 — 해운대비치CC</option>
       <option value="jo5">26년 4월 11일 — 통도CC</option>
       <option value="jo4">26년 3월 14일 — 스톤게이트CC</option>
@@ -517,8 +520,21 @@ footer{background:var(--g1);color:rgba(255,255,255,.55);text-align:center;
     </div>
   </div>
 
+  <!-- 26.6 울산CC -->
+  <div id="jo7" class="round-card active">
+    <div class="round-head">
+      <span class="r-title">6월 13일 (토) — 울산CC</span>
+    </div>
+    <div class="round-body">
+      <div class="group-row"><span class="group-label course-east">1조 (동)</span><span class="group-time">17:18</span><div class="player-list"><span class="player">김기웅</span><span class="player">윤혁진</span><span class="player">오대한</span><span class="player">이강준 <span style="font-size:.75em;color:#bbb">(G)</span></span></div></div>
+      <div class="group-row"><span class="group-label course-east">2조 (동)</span><span class="group-time">17:24</span><div class="player-list"><span class="player">박찬복</span><span class="player">이민호</span><span class="player">박정태</span><span class="player">장재연</span></div></div>
+      <div class="group-row"><span class="group-label course-south">3조 (남)</span><span class="group-time">17:18</span><div class="player-list"><span class="player">탁승우</span><span class="player">이재원</span><span class="player">김성동</span><span class="player">장태원 <span style="font-size:.75em;color:#bbb">(G)</span></span></div></div>
+      <div class="group-row"><span class="group-label course-south">4조 (남)</span><span class="group-time">17:24</span><div class="player-list"><span class="player">이수형</span><span class="player">강현명</span><span class="player">정지환</span><span class="player">전지훈 <span style="font-size:.75em;color:#bbb">(G)</span></span></div></div>
+    </div>
+  </div>
+
   <!-- 26.5 해운대비치CC -->
-  <div id="jo6" class="round-card active">
+  <div id="jo6" class="round-card">
     <div class="round-head">
       <span class="r-title">5월 9일 (토) — 해운대비치CC</span>
     </div>
@@ -544,9 +560,9 @@ footer{background:var(--g1);color:rgba(255,255,255,.55);text-align:center;
     </div>
   </div>
 
-  <!-- 5월 시상 및 게임 -->
+  <!-- 6월 시상 및 게임 -->
   <div class="card" style="margin-top:8px">
-    <div class="card-head">🏆 5월 시상 및 게임 안내</div>
+    <div class="card-head">🏆 6월 시상 및 게임 안내</div>
     <div class="card-body">
 
       <p style="font-size:.88rem;font-weight:700;color:var(--g1);margin-bottom:10px">📋 시상 내역</p>
@@ -554,22 +570,21 @@ footer{background:var(--g1);color:rgba(255,255,255,.55);text-align:center;
         <div style="background:var(--g4);border-radius:10px;padding:12px 14px">
           <div style="display:flex;justify-content:space-between;align-items:center">
             <span style="font-weight:700;color:var(--g1)">🥇 골드메달</span>
-            <span style="font-weight:700;color:#b06a10">40,000원</span>
+            <span style="font-weight:700;color:#b06a10">20,000원</span>
           </div>
-          <div style="margin-top:5px;font-size:.82rem;color:#555">+ 혼마 골프공 1더즌 <span style="color:#888">(정지환님 협찬)</span></div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
           <div style="background:#fef6ec;border-radius:10px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center">
             <span style="font-weight:700;color:var(--g1)">🏌️ 롱기</span>
-            <span style="font-weight:700;color:#b06a10">20,000원</span>
+            <span style="font-weight:700;color:#b06a10">10,000원</span>
           </div>
           <div style="background:#fef6ec;border-radius:10px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center">
             <span style="font-weight:700;color:var(--g1)">⛳ 니어</span>
-            <span style="font-weight:700;color:#b06a10">20,000원</span>
+            <span style="font-weight:700;color:#b06a10">10,000원</span>
           </div>
           <div style="background:#fef6ec;border-radius:10px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center">
             <span style="font-weight:700;color:var(--g1)">😅 아차상</span>
-            <span style="font-weight:700;color:#b06a10">20,000원</span>
+            <span style="font-weight:700;color:#b06a10">10,000원</span>
           </div>
         </div>
       </div>
@@ -578,48 +593,25 @@ footer{background:var(--g1);color:rgba(255,255,255,.55);text-align:center;
       <div style="background:#f4f8f4;border-radius:10px;padding:12px 14px;margin-bottom:14px;font-size:.85rem;line-height:1.8;color:#444">
         <p>📌 <strong>지급 기준:</strong> 핸디표 기준으로 가장 핸디를 많이 줄인 순으로 시상<br>
         <span style="padding-left:1.4em">동타 시 핸디가 낮은 자 우선</span></p>
-        <p style="margin-top:4px">💰 <strong>갹출:</strong> 14명 × 10,000원 = <strong>140,000원</strong><br>
-        <span style="padding-left:1.4em">우승상금 40,000원 + 갹출 140,000원 = <strong>상금 합계 180,000원</strong></span></p>
+        <p style="margin-top:4px">💰 <strong>갹출:</strong> 13명 × 10,000원 = <strong>130,000원</strong><br>
+        <span style="padding-left:1.4em">우승상금 20,000원 + 갹출 130,000원 = <strong>상금 합계 150,000원</strong></span></p>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px">
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
         <div style="border-radius:10px;padding:12px 14px;background:#fffbe6;border:1.5px solid #f0c040;text-align:center">
           <div style="font-size:.78rem;color:#888;margin-bottom:2px">1위 (총상금 40%)</div>
-          <div style="font-size:1.1rem;font-weight:800;color:#b06a10">72,000원</div>
+          <div style="font-size:1.1rem;font-weight:800;color:#b06a10">60,000원</div>
         </div>
         <div style="border-radius:10px;padding:12px 14px;background:#f5f5f5;border:1.5px solid #ccc;text-align:center">
           <div style="font-size:.78rem;color:#888;margin-bottom:2px">2위 (총상금 30%)</div>
-          <div style="font-size:1.1rem;font-weight:800;color:#555">54,000원</div>
+          <div style="font-size:1.1rem;font-weight:800;color:#555">45,000원</div>
         </div>
         <div style="border-radius:10px;padding:12px 14px;background:#fdf0e8;border:1.5px solid #e0a080;text-align:center">
           <div style="font-size:.78rem;color:#888;margin-bottom:2px">3위 (총상금 20%)</div>
-          <div style="font-size:1.1rem;font-weight:800;color:#a05030">36,000원</div>
+          <div style="font-size:1.1rem;font-weight:800;color:#a05030">30,000원</div>
         </div>
         <div style="border-radius:10px;padding:12px 14px;background:#f0f4f0;border:1.5px solid #b0c8b0;text-align:center">
           <div style="font-size:.78rem;color:#888;margin-bottom:2px">4위 (총상금 10%)</div>
-          <div style="font-size:1.1rem;font-weight:800;color:#446644">18,000원</div>
-        </div>
-      </div>
-
-      <p style="font-size:.88rem;font-weight:700;color:#2a7fb0;margin-bottom:8px">👩 여성부 시상</p>
-      <div style="background:#f0f6fc;border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:.85rem;color:#444">
-        📌 <strong>시상 방법:</strong> 1위~4위 순으로 본인이 원하는 상품 pick!
-      </div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <div style="border-radius:10px;padding:11px 14px;background:#f9fdf9;border:1.5px solid #c8d9c9;display:flex;gap:10px;align-items:center">
-          <span style="min-width:44px;padding:3px 6px;border-radius:6px;background:var(--g1);color:#fff;font-weight:700;font-size:.8rem;text-align:center">상품1</span>
-          <span>볼빅 골프공 1더즌 <span style="font-size:.8rem;color:#888">(강진구님 협찬)</span></span>
-        </div>
-        <div style="border-radius:10px;padding:11px 14px;background:#f9fdf9;border:1.5px solid #c8d9c9;display:flex;gap:10px;align-items:center">
-          <span style="min-width:44px;padding:3px 6px;border-radius:6px;background:var(--g1);color:#fff;font-weight:700;font-size:.8rem;text-align:center">상품2</span>
-          <span>현금 3만원 <span style="font-size:.8rem;color:#888">(강현명님 협찬)</span></span>
-        </div>
-        <div style="border-radius:10px;padding:11px 14px;background:#f9fdf9;border:1.5px solid #c8d9c9;display:flex;gap:10px;align-items:center">
-          <span style="min-width:44px;padding:3px 6px;border-radius:6px;background:var(--g1);color:#fff;font-weight:700;font-size:.8rem;text-align:center">상품3</span>
-          <span>준의원 5만원 상당 화장품 <span style="font-size:.8rem;color:#888">(천규민님 협찬)</span></span>
-        </div>
-        <div style="border-radius:10px;padding:11px 14px;background:#f9fdf9;border:1.5px solid #c8d9c9;display:flex;gap:10px;align-items:center">
-          <span style="min-width:44px;padding:3px 6px;border-radius:6px;background:var(--g1);color:#fff;font-weight:700;font-size:.8rem;text-align:center">상품4</span>
-          <span>베리덤 약산성 클렌져 + 베리덤 썬크림 <span style="font-size:.8rem;color:#888">(김기웅님 협찬)</span></span>
+          <div style="font-size:1.1rem;font-weight:800;color:#446644">15,000원</div>
         </div>
       </div>
 
