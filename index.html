@@ -765,6 +765,88 @@ footer{background:var(--g1);color:rgba(255,255,255,.55);text-align:center;
 ══════════════════════════════════════ -->
 <section id="tab-notice" class="panel">
   <h2 class="panel-title">공지</h2>
+
+  <!-- ── 핸디 계산 방식 변경 공지 ── -->
+  <div class="card" style="margin-bottom:18px;border:2px solid #2d6635">
+    <div class="card-head" style="background:linear-gradient(135deg,#1a4a22,#2d6635)">📣 핸디캐프 계산 방식 변경 안내</div>
+    <div class="card-body">
+
+      <p style="font-size:.9rem;line-height:1.7;color:#1a2e1c;margin-bottom:16px">
+        기존 <strong>총평균법</strong>에서 <strong>가중평균법</strong>으로 핸디 계산 방식을 변경합니다.<br>
+        최근 라운드 성적이 핸디에 더 빠르게 반영되어 <strong>현재 실력 기반의 공정한 경쟁</strong>이 가능해집니다.
+      </p>
+
+      <!-- 방식 비교 표 -->
+      <div class="tbl-wrap" style="margin-bottom:20px">
+        <table style="font-size:.85rem">
+          <thead>
+            <tr>
+              <th style="width:30%">비교 항목</th>
+              <th style="width:35%;background:#b71c1c;color:#fff">❌ 총평균법 (기존)</th>
+              <th style="width:35%;background:#1b5e20;color:#fff">✅ 가중평균법 (신규)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:600;background:#f5f5f5">계산 방식</td>
+              <td class="c" style="color:#555">모든 라운드<br>동일 비중</td>
+              <td class="c" style="color:#1a4a22;font-weight:600">최신 ×4 · 2번째 ×3<br>3번째 ×2 · 이후 ×1</td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;background:#f5f5f5">최신 실력 반영</td>
+              <td class="c" style="color:#c62828">느림 😓<br><span style="font-size:.78em;color:#888">6개월 전 스코어도 동일 영향</span></td>
+              <td class="c" style="color:#2e7d32">빠름 👍<br><span style="font-size:.78em;color:#888">최근 경기 비중 4배 높음</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;background:#f5f5f5">실력 향상 시</td>
+              <td class="c" style="color:#c62828">핸디 변화 더딤 😓<br><span style="font-size:.78em;color:#888">향상 효과가 천천히 반영</span></td>
+              <td class="c" style="color:#2e7d32">핸디 빠르게 하락 👍<br><span style="font-size:.78em;color:#888">열심히 치면 바로 보상</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;background:#f5f5f5">부진 라운드 영향</td>
+              <td class="c" style="color:#c62828">오래 지속됨 😓<br><span style="font-size:.78em;color:#888">한 번 나쁜 스코어 계속 발목</span></td>
+              <td class="c" style="color:#2e7d32">시간 지나면 희석 👍<br><span style="font-size:.78em;color:#888">과거 스코어 영향 자연 감소</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;background:#f5f5f5">경쟁 공정성</td>
+              <td class="c" style="color:#c62828">현재 컨디션 미반영 😓<br><span style="font-size:.78em;color:#888">과거 성적으로 유불리 발생</span></td>
+              <td class="c" style="color:#2e7d32">현재 실력 중심 👍<br><span style="font-size:.78em;color:#888">그날그날 폼이 핸디에 반영</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 예시 계산 -->
+      <div style="background:#f0f7f1;border-radius:10px;padding:14px 16px;margin-bottom:4px">
+        <p style="font-weight:700;color:#1a4a22;margin-bottom:10px;font-size:.88rem">📌 계산 예시 — 실력이 향상된 회원의 경우</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:.82rem">
+          <div>
+            <p style="font-weight:600;color:#555;margin-bottom:6px">라운드 기록 (최신 → 과거)</p>
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <span style="display:flex;align-items:center;gap:8px"><span style="background:#e65100;color:#fff;border-radius:4px;padding:1px 7px;font-size:.82em;font-weight:700">×4</span> 최신 79타 🔥</span>
+              <span style="display:flex;align-items:center;gap:8px"><span style="background:#2e7d32;color:#fff;border-radius:4px;padding:1px 7px;font-size:.82em;font-weight:700">×3</span> 2번째 85타</span>
+              <span style="display:flex;align-items:center;gap:8px"><span style="background:#1565c0;color:#fff;border-radius:4px;padding:1px 7px;font-size:.82em;font-weight:700">×2</span> 3번째 90타</span>
+              <span style="display:flex;align-items:center;gap:8px"><span style="background:#757575;color:#fff;border-radius:4px;padding:1px 7px;font-size:.82em;font-weight:700">×1</span> 4번째 95타</span>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;justify-content:center">
+            <div style="background:#fff;border-radius:8px;padding:10px 14px;border:1px solid #ddd;text-align:center">
+              <p style="font-size:.78em;color:#888;margin-bottom:2px">총평균법 (기존)</p>
+              <p style="font-size:1.1rem;font-weight:700;color:#b71c1c">(79+85+90+95) ÷ 4 = <span style="font-size:1.3rem">87</span></p>
+            </div>
+            <div style="background:#e8f5e9;border-radius:8px;padding:10px 14px;border:2px solid #2d6635;text-align:center">
+              <p style="font-size:.78em;color:#2d6635;margin-bottom:2px">가중평균법 (신규)</p>
+              <p style="font-size:.82rem;color:#555;margin-bottom:2px">(79×4 + 85×3 + 90×2 + 95×1) ÷ 10</p>
+              <p style="font-size:1.3rem;font-weight:700;color:#1b5e20">= <span style="font-size:1.5rem">84</span> <span style="font-size:.85rem;color:#2e7d32">↓ 3타 개선</span></p>
+            </div>
+          </div>
+        </div>
+        <p style="margin-top:10px;font-size:.78rem;color:#666;text-align:center">최근 잘 치면 → 핸디가 더 빠르게 낮아져 <strong style="color:#1a4a22">실력 향상의 보상이 즉각 반영</strong>됩니다</p>
+      </div>
+
+    </div>
+  </div>
+
   <div class="card">
     <div class="card-head">📢 골프에진심 라운드 기본 규칙</div>
     <div class="card-body">
