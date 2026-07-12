@@ -828,8 +828,95 @@ footer{background:var(--g1);color:rgba(255,255,255,.55);text-align:center;
   <!-- ── 핸디 계산 기준 안내 ── -->
   <div class="card" style="margin-bottom:18px;border:2px solid #2d6635">
     <div class="card-head" style="background:linear-gradient(135deg,#1a4a22,#2d6635)">📣 핸디캡 계산 기준 안내</div>
-    <div class="card-body" style="text-align:center;padding:16px">
-      <img src="handy-guide.png" alt="골프에진심 핸디캡 계산 기준 안내" style="max-width:100%;height:auto;border-radius:8px"/>
+    <div class="card-body">
+
+      <!-- 한 줄 요약 -->
+      <div style="background:var(--g4);border-radius:10px;padding:14px 16px;text-align:center;margin-bottom:18px">
+        <p style="font-size:.85rem;color:var(--g1);margin-bottom:3px">최근 라운딩일수록 더 크게 반영하는</p>
+        <p style="font-size:1.15rem;font-weight:800;color:#b06a10">가중평균 방식</p>
+      </div>
+
+      <!-- 계산 공식 -->
+      <p style="font-size:.9rem;font-weight:700;color:var(--g1);margin-bottom:8px">📐 계산 공식</p>
+      <div style="background:#f7faf7;border:1px solid #e2e8e2;border-radius:10px;padding:16px 12px;margin-bottom:22px;text-align:center">
+        <div style="display:inline-block;text-align:center;font-size:.82rem;color:#333;line-height:1.7">
+          <div style="padding:0 6px 6px;border-bottom:2px solid var(--g2)">기준핸디×1 + Σ(각 라운드 스코어 × 가중치)</div>
+          <div style="padding-top:6px">1 + Σ(참가한 라운드의 가중치)</div>
+        </div>
+        <p style="font-size:.75rem;color:#999;margin-top:10px">※ 소수점은 반올림</p>
+      </div>
+
+      <!-- 라운드별 가중치 -->
+      <p style="font-size:.9rem;font-weight:700;color:var(--g1);margin-bottom:10px">⚖️ 라운드별 가중치</p>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:22px">
+        <div style="display:flex;align-items:center;gap:12px;background:var(--g4);border-left:5px solid #1a4a22;border-radius:8px;padding:10px 14px">
+          <div style="flex:1"><div style="font-weight:700;color:var(--text)">최신 라운드</div><div style="font-size:.78rem;color:#777">가장 최근 (예: 26.7 이든)</div></div>
+          <span style="background:#1a4a22;color:#fff;font-weight:800;border-radius:8px;padding:4px 12px;font-size:.95rem">×4</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e6e6e6;border-left:5px solid #2d6635;border-radius:8px;padding:10px 14px">
+          <div style="flex:1"><div style="font-weight:700;color:var(--text)">직전 라운드</div><div style="font-size:.78rem;color:#777">그 전 달 (26.6)</div></div>
+          <span style="background:#2d6635;color:#fff;font-weight:800;border-radius:8px;padding:4px 12px;font-size:.95rem">×3</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e6e6e6;border-left:5px solid #3d7c47;border-radius:8px;padding:10px 14px">
+          <div style="flex:1"><div style="font-weight:700;color:var(--text)">전전 라운드</div><div style="font-size:.78rem;color:#777">그 전전 달 (26.5)</div></div>
+          <span style="background:#3d7c47;color:#fff;font-weight:800;border-radius:8px;padding:4px 12px;font-size:.95rem">×2</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e6e6e6;border-left:5px solid #8a928c;border-radius:8px;padding:10px 14px">
+          <div style="flex:1"><div style="font-weight:700;color:var(--text)">나머지 4개</div><div style="font-size:.78rem;color:#777">26.4 ~ 26.1 (각각)</div></div>
+          <span style="background:#8a928c;color:#fff;font-weight:800;border-radius:8px;padding:4px 12px;font-size:.95rem">×1</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #e6e6e6;border-left:5px solid #b06a10;border-radius:8px;padding:10px 14px">
+          <div style="flex:1"><div style="font-weight:700;color:var(--text)">기준핸디</div><div style="font-size:.78rem;color:#777">항상 포함 · 기준점 역할</div></div>
+          <span style="background:#b06a10;color:#fff;font-weight:800;border-radius:8px;padding:4px 12px;font-size:.95rem">×1</span>
+        </div>
+      </div>
+
+      <!-- 핵심 규칙 -->
+      <p style="font-size:.9rem;font-weight:700;color:var(--g1);margin-bottom:10px">🔑 핵심 규칙</p>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:22px">
+        <div style="display:flex;gap:10px;align-items:flex-start;background:#f7faf7;border-radius:8px;padding:10px 14px">
+          <span style="min-width:8px;height:8px;border-radius:50%;background:var(--g2);margin-top:7px"></span>
+          <div><div style="font-weight:700;color:var(--g1);font-size:.9rem">미참가(0)는 제외</div><div style="font-size:.8rem;color:#777">참가한 라운드만 분자·분모에 넣어 계산</div></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start;background:#f7faf7;border-radius:8px;padding:10px 14px">
+          <span style="min-width:8px;height:8px;border-radius:50%;background:var(--g2);margin-top:7px"></span>
+          <div><div style="font-weight:700;color:var(--g1);font-size:.9rem">기준핸디는 항상 포함</div><div style="font-size:.8rem;color:#777">참가 이력이 적어도 값이 튀지 않게 고정</div></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start;background:#f7faf7;border-radius:8px;padding:10px 14px">
+          <span style="min-width:8px;height:8px;border-radius:50%;background:var(--g2);margin-top:7px"></span>
+          <div><div style="font-weight:700;color:var(--g1);font-size:.9rem">최근 7개 라운드 기준</div><div style="font-size:.8rem;color:#777">새 라운드 추가 시 가장 오래된 것은 제외</div></div>
+        </div>
+      </div>
+
+      <!-- 계산 예시 -->
+      <p style="font-size:.9rem;font-weight:700;color:var(--g1);margin-bottom:10px">📊 계산 예시 — 김기웅 (7월 반영)</p>
+      <div class="tbl-wrap" style="margin-bottom:14px">
+        <table style="font-size:.85rem">
+          <thead><tr><th>라운드</th><th>스코어</th><th>가중치</th><th>스코어×가중치</th></tr></thead>
+          <tbody>
+            <tr><td>26.7 이든</td><td class="c">80</td><td class="c">×4</td><td class="c" style="font-weight:700;color:#2d6635">320</td></tr>
+            <tr><td>26.6 울산</td><td class="c">80</td><td class="c">×3</td><td class="c" style="font-weight:700;color:#2d6635">240</td></tr>
+            <tr><td>26.5 해운대</td><td class="c">90</td><td class="c">×2</td><td class="c" style="font-weight:700;color:#2d6635">180</td></tr>
+            <tr><td>26.4 통도</td><td class="c">80</td><td class="c">×1</td><td class="c" style="font-weight:700;color:#2d6635">80</td></tr>
+            <tr><td>26.3 스톤</td><td class="c">94</td><td class="c">×1</td><td class="c" style="font-weight:700;color:#2d6635">94</td></tr>
+            <tr><td>26.2 스톤</td><td class="c">88</td><td class="c">×1</td><td class="c" style="font-weight:700;color:#2d6635">88</td></tr>
+            <tr><td>26.1 서라벌</td><td class="c">87</td><td class="c">×1</td><td class="c" style="font-weight:700;color:#2d6635">87</td></tr>
+            <tr><td>기준핸디</td><td class="c">86</td><td class="c">×1</td><td class="c" style="font-weight:700;color:#2d6635">86</td></tr>
+            <tr style="background:var(--g4)!important;font-weight:700"><td style="color:var(--g1)">합계</td><td class="c"></td><td class="c" style="color:var(--g1)">14</td><td class="c" style="color:var(--g1)">1,175</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 결과 배너 -->
+      <div style="background:#b06a10;border-radius:10px;padding:14px;text-align:center;color:#fff;font-weight:800;font-size:1.05rem">
+        1,175 ÷ 14 = 83.9 &nbsp;→&nbsp; 핸디 84
+      </div>
+
+      <p style="text-align:center;font-size:.78rem;color:#888;margin-top:14px;line-height:1.6">
+        가중치 합계 = 4+3+2+1+1+1+1+1 = 14<br>
+        최근 3라운드가 전체의 약 <strong style="color:var(--g1)">69%</strong> 비중을 차지합니다
+      </p>
+
     </div>
   </div>
 
