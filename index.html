@@ -1040,7 +1040,8 @@ footer{background:var(--g1);color:rgba(255,255,255,.55);text-align:center;
   <div id="ops-wolsuji" class="sub-panel">
     <div id="ops-ws">
     <div class="sub-bar" style="margin-bottom:16px">
-      <button class="sub-btn active" onclick="subTab('ops-ws','w7',this)">26.6월</button>
+      <button class="sub-btn active" onclick="subTab('ops-ws','w8',this)">26.7월</button>
+      <button class="sub-btn" onclick="subTab('ops-ws','w7',this)">26.6월</button>
       <button class="sub-btn" onclick="subTab('ops-ws','w6',this)">26.5월</button>
       <button class="sub-btn" onclick="subTab('ops-ws','w5',this)">26.4월</button>
       <button class="sub-btn" onclick="subTab('ops-ws','w4',this)">26.3월</button>
@@ -1048,8 +1049,40 @@ footer{background:var(--g1);color:rgba(255,255,255,.55);text-align:center;
       <button class="sub-btn" onclick="subTab('ops-ws','w2',this)">26.1월</button>
       <button class="sub-btn" onclick="subTab('ops-ws','w1',this)">25.12월</button>
     </div>
+    <!-- 26.7(7) -->
+    <div id="ops-ws-w8" class="sub-panel active">
+      <div class="card">
+        <div class="card-head">골프에진심 26.6월15일~7월12일 결산서 (7회)</div>
+        <div class="card-body">
+          <div class="income-expense">
+            <div class="ie-block ie-income"><div class="ie-head">수입</div>
+              <table><thead><tr><th>일자</th><th>내용</th><th>금액</th><th>비고</th></tr></thead><tbody>
+                <tr><td>2026.6.15</td><td>전기이월금</td><td class="r">1,454,423</td><td>전기 이월금</td></tr>
+                <tr><td>2026.6.16</td><td>회비수입 (전지훈)</td><td class="r">90,000</td><td></td></tr>
+                <tr><td>2026.6.27</td><td>이자수익</td><td class="r">129</td><td></td></tr>
+                <tr><td>2026.7.12</td><td>회비수입 (장태원)</td><td class="r">90,000</td><td></td></tr>
+                <tr class="total-row"><td colspan="2">합계</td><td class="r">1,634,552</td><td></td></tr>
+              </tbody></table>
+            </div>
+            <div class="ie-block ie-expense"><div class="ie-head">지출</div>
+              <table><thead><tr><th>일자</th><th>내용</th><th>금액</th><th>비고</th></tr></thead><tbody>
+                <tr><td>2026.7.5</td><td>오구회 교류전</td><td class="r">62,500</td><td>3부 카트비·캐디피 지원</td></tr>
+                <tr><td>2026.7.12</td><td>식대</td><td class="r">180,200</td><td>제주대패랑옛날갈비</td></tr>
+                <tr><td>2026.7.12</td><td>시상</td><td class="r">60,000</td><td>우승·골드메달 각2만원, 롱기·니어 각1만원</td></tr>
+                <tr class="total-row"><td colspan="2">합계</td><td class="r">302,700</td><td></td></tr>
+              </tbody></table>
+            </div>
+          </div>
+          <div style="background:var(--g4);border-radius:8px;padding:12px 16px;margin-top:14px;display:flex;gap:30px;flex-wrap:wrap">
+            <div><span style="font-size:.8rem;color:#666">수입 합계</span><br><strong style="font-size:1.1rem;color:#2d6635">1,634,552원</strong></div>
+            <div><span style="font-size:.8rem;color:#666">지출 합계</span><br><strong style="font-size:1.1rem;color:#a53c2a">302,700원</strong></div>
+            <div><span style="font-size:.8rem;color:#666">차월 이월잔액</span><br><strong style="font-size:1.2rem;color:var(--g1)">1,331,852원</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- 26.6(6) -->
-    <div id="ops-ws-w7" class="sub-panel active">
+    <div id="ops-ws-w7" class="sub-panel">
       <div class="card">
         <div class="card-head">골프에진심 26.5월11일~6월14일 결산서 (6회)</div>
         <div class="card-body">
