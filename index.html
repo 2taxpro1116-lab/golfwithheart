@@ -107,6 +107,7 @@ td.c{text-align:center}
 .course-east{background:#2a6a5e}
 .course-south{background:#7a4a2a}
 .course-eden{background:#3d5a80}
+.course-valley{background:#6b8e3d}
 .award-card{display:none}
 .award-card.active{display:block}
 .group-time{color:var(--text2);font-size:.8rem;min-width:64px}
@@ -510,6 +511,7 @@ footer{background:var(--g1);color:rgba(255,255,255,.55);text-align:center;
 
   <div class="jo-select-wrap">
     <select class="jo-select" onchange="showRound(this.value)">
+      <option value="jo9">26년 8월 8일 — 골프존카운티 이든</option>
       <option value="jo8">26년 7월 11일 — 골프존카운티 이든</option>
       <option value="jo7">26년 6월 13일 — 울산CC</option>
       <option value="jo6">26년 5월 9일 — 해운대비치CC</option>
@@ -569,8 +571,20 @@ footer{background:var(--g1);color:rgba(255,255,255,.55);text-align:center;
     </div>
   </div>
 
+  <!-- 26.8 골프존카운티 이든 -->
+  <div id="jo9" class="round-card active">
+    <div class="round-head">
+      <span class="r-title">8월 8일 (토) — 골프존카운티 이든</span>
+    </div>
+    <div class="round-body">
+      <div class="group-row"><span class="group-label course-eden">1조 (이든)</span><span class="group-time">17:07</span><div class="player-list"><span class="player">김기웅</span><span class="player">김동환</span><span class="player">장태원</span><span class="player">김성동</span></div></div>
+      <div class="group-row"><span class="group-label course-eden">2조 (이든)</span><span class="group-time">17:14</span><div class="player-list"><span class="player">천규민</span><span class="player">정지환</span><span class="player">이용희</span><span class="player">이재원</span></div></div>
+      <div class="group-row"><span class="group-label course-valley">3조 (밸리)</span><span class="group-time">17:07</span><div class="player-list"><span class="player">이수형</span><span class="player">이경복</span><span class="player">탁승우</span><span class="player">홍준오 <span style="font-size:.75em;color:#bbb">(G)</span></span></div></div>
+    </div>
+  </div>
+
   <!-- 26.7 골프존카운티 이든 -->
-  <div id="jo8" class="round-card active">
+  <div id="jo8" class="round-card">
     <div class="round-head">
       <span class="r-title">7월 11일 (토) — 골프존카운티 이든</span>
     </div>
@@ -621,7 +635,7 @@ footer{background:var(--g1);color:rgba(255,255,255,.55);text-align:center;
   </div>
 
   <!-- 7월 시상 결과 -->
-  <div id="award-jo8" class="award-card active" style="margin-top:8px">
+  <div id="award-jo8" class="award-card" style="margin-top:8px">
   <div class="card">
     <div class="card-head">🏆 7월 시상 결과</div>
     <div class="card-body">
