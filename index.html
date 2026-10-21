@@ -254,7 +254,7 @@ footer{background:var(--g1);color:rgba(255,255,255,.55);text-align:center;
           <div class="sched-item"><div class="sched-no">No.7</div><div class="sched-date">7월 11일<span class="sched-day">토</span></div><div class="sched-venue">골프존카운티 이든</div><div class="sched-note" style="font-size:.72rem;color:#888">(구 에덴벨리)</div></div>
           <div class="sched-item"><div class="sched-no">No.8</div><div class="sched-date">8월 8일<span class="sched-day">토</span></div><div class="sched-venue">골프존카운티 이든</div><div class="sched-note" style="font-size:.72rem;color:#888">(구 에덴벨리)</div></div>
           <div class="sched-item contest"><div class="sched-no">No.9</div><div class="sched-date">9월 12일<span class="sched-day">토</span></div><div class="sched-venue">골프존카운티 이든</div><div class="sched-note">🏆 대회</div><div class="sched-note" style="font-size:.72rem;color:#888">(구 에덴벨리)</div></div>
-          <div class="sched-item trip"><div class="sched-no">No.10</div><div class="sched-date">10월 17일<span class="sched-day">토</span></div><div class="sched-venue">감포(3부) / 감포(1부)</div><div class="sched-note">1박2일 원정</div></div>
+          <div class="sched-item trip"><div class="sched-no">No.10</div><div class="sched-date">10월 24~25일<span class="sched-day">토~일</span></div><div class="sched-venue">감포(3부) / 감포(1부)</div><div class="sched-note">1박2일 원정</div></div>
           <div class="sched-item"><div class="sched-no">No.11</div><div class="sched-date">11월 14일<span class="sched-day">토</span></div><div class="sched-venue">미정</div></div>
           <div class="sched-item contest"><div class="sched-no">No.12</div><div class="sched-date">12월 13일<span class="sched-day">일</span></div><div class="sched-venue">미정</div><div class="sched-note">🏆 대회</div></div>
         </div>
@@ -528,6 +528,7 @@ footer{background:var(--g1);color:rgba(255,255,255,.55);text-align:center;
 
   <div class="jo-select-wrap">
     <select class="jo-select" onchange="showRound(this.value)">
+      <option value="jo11">26년 10월 24~25일 — 골프존카운티 감포 (원정)</option>
       <option value="jo10">26년 9월 12일 — 골프존카운티 이든</option>
       <option value="jo9">26년 8월 8일 — 골프존카운티 이든</option>
       <option value="jo8">26년 7월 11일 — 골프존카운티 이든</option>
@@ -589,8 +590,24 @@ footer{background:var(--g1);color:rgba(255,255,255,.55);text-align:center;
     </div>
   </div>
 
+  <!-- 26.10 골프존카운티 감포 (1박 2일 원정) -->
+  <div id="jo11" class="round-card active">
+    <div class="round-head">
+      <span class="r-title">10월 24일 (토) ~ 25일 (일) — 골프존카운티 감포</span>
+      <span style="font-size:.78rem;opacity:.8">1박 2일 원정</span>
+    </div>
+    <div class="round-body">
+      <div style="font-size:.85rem;font-weight:700;color:var(--g1);border-bottom:1px solid var(--g4);padding-bottom:4px">📅 1일차 — 10월 24일 (토)</div>
+      <div class="group-row"><span class="group-label course-out">1조 (OUT)</span><span class="group-time">17:00</span><div class="player-list"><span class="player">김기웅</span><span class="player">정지환</span><span class="player">이경복</span><span class="player">이수형</span></div></div>
+      <div class="group-row"><span class="group-label course-out">2조 (OUT)</span><span class="group-time">17:07</span><div class="player-list"><span class="player">강현명</span><span class="player">전지훈</span><span class="player">이재원</span><span class="player">김성동</span></div></div>
+      <div style="font-size:.85rem;font-weight:700;color:var(--g1);border-bottom:1px solid var(--g4);padding-bottom:4px;margin-top:6px">📅 2일차 — 10월 25일 (일)</div>
+      <div class="group-row"><span class="group-label course-out">1조 (OUT)</span><span class="group-time">08:29</span><div class="player-list"><span class="player">김기웅</span><span class="player">오대한</span><span class="player">이재원</span><span class="player">전지훈</span></div></div>
+      <div class="group-row"><span class="group-label course-out">2조 (OUT)</span><span class="group-time">08:36</span><div class="player-list"><span class="player">정지환</span><span class="player">강현명</span><span class="player">김성동</span><span class="player">조현</span></div></div>
+    </div>
+  </div>
+
   <!-- 26.9 골프존카운티 이든 -->
-  <div id="jo10" class="round-card active">
+  <div id="jo10" class="round-card">
     <div class="round-head">
       <span class="r-title">9월 12일 (토) — 골프존카운티 이든</span>
     </div>
@@ -664,7 +681,7 @@ footer{background:var(--g1);color:rgba(255,255,255,.55);text-align:center;
   </div>
 
   <!-- 9월 시상 및 게임 안내 -->
-  <div id="award-jo10" class="award-card active" style="margin-top:8px">
+  <div id="award-jo10" class="award-card" style="margin-top:8px">
   <div class="card">
     <div class="card-head" style="background:linear-gradient(135deg,#8a5310,#c0822a)">🏆 9월 대회 시상 안내</div>
     <div class="card-body">
@@ -1204,7 +1221,7 @@ footer{background:var(--g1);color:rgba(255,255,255,.55);text-align:center;
           <div class="sched-item"><div class="sched-no">No.7</div><div class="sched-date">7월 11일<span class="sched-day">토</span></div><div class="sched-venue">골프존카운티 이든</div><div class="sched-note" style="font-size:.72rem;color:#888">(구 에덴벨리)</div></div>
           <div class="sched-item"><div class="sched-no">No.8</div><div class="sched-date">8월 8일<span class="sched-day">토</span></div><div class="sched-venue">골프존카운티 이든</div><div class="sched-note" style="font-size:.72rem;color:#888">(구 에덴벨리)</div></div>
           <div class="sched-item contest"><div class="sched-no">No.9</div><div class="sched-date">9월 12일<span class="sched-day">토</span></div><div class="sched-venue">골프존카운티 이든</div><div class="sched-note">🏆 대회</div><div class="sched-note" style="font-size:.72rem;color:#888">(구 에덴벨리)</div></div>
-          <div class="sched-item trip"><div class="sched-no">No.10</div><div class="sched-date">10월 17일<span class="sched-day">토</span></div><div class="sched-venue">감포(3부) / 감포(1부)</div><div class="sched-note">1박2일 원정</div></div>
+          <div class="sched-item trip"><div class="sched-no">No.10</div><div class="sched-date">10월 24~25일<span class="sched-day">토~일</span></div><div class="sched-venue">감포(3부) / 감포(1부)</div><div class="sched-note">1박2일 원정</div></div>
           <div class="sched-item"><div class="sched-no">No.11</div><div class="sched-date">11월 14일<span class="sched-day">토</span></div><div class="sched-venue">미정</div></div>
           <div class="sched-item contest"><div class="sched-no">No.12</div><div class="sched-date">12월 13일<span class="sched-day">일</span></div><div class="sched-venue">미정</div><div class="sched-note">🏆 대회</div></div>
         </div>
